@@ -81,7 +81,11 @@
                     </div>
 
                     <div class="section-body">
-                        @yield('content')
+                        <div class="card">
+                            <div class="p-3">
+                                @yield('content')
+                            </div>
+                        </div>
                     </div>
                 </section>
             </div>

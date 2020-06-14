@@ -8,26 +8,32 @@
         </div>
         <ul class="sidebar-menu">
             <li>
-                <a class="nav-link" href="{{ url('/') }}"><i class="fas fa-fire"></i>
+                <a class="nav-link" href="{{ url('/dashboard') }}"><i class="fas fa-fire"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-database"></i><span>Data Master</span></a>
+                <a class="nav-link has-dropdown"><i class="fas fa-database"></i><span>Data Master</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="{{ url('/province') }}">List Province</a></li>
-                    <li><a class="nav-link" href="{{ url('/city') }}">List City</a></li>
-                    <li><a class="nav-link" href="{{ url('/area') }}">List Area</a></li>
+                    <li><a class="nav-link" href="{{ url('/angkatan') }}">Angkatan</a></li>
+                    <li><a class="nav-link" href="{{ url('/semester') }}">Semester</a></li>
+                    <li><a class="nav-link" href="{{ url('/program-studi') }}">Program Studi</a></li>
+                    <li><a class="nav-link" href="{{ url('/mata-kuliah') }}">Mata Kuliah</a></li>
                 </ul>
             </li>
             <li>
-                <a class="nav-link" href="{{ url('/user') }}"><i class="fas fa-user"></i>
-                    <span>Data Admin</span>
+                <a class="nav-link" href="{{ url('/dosen') }}"><i class="fas fa-user"></i>
+                    <span>Dosen</span>
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="{{ url('/logs') }}"><i class="fas fa-history"></i>
-                    <span>Logs Activity</span>
+                <a class="nav-link" href="{{ url('/mahasiswa') }}"><i class="fas fa-user"></i>
+                    <span>Mahasiswa</span>
+                </a>
+            </li>
+            <li>
+                <a class="nav-link" href="{{ url('/kartu-rencana-studi') }}"><i class="fas fa-id-card"></i>
+                    <span>Kartu Rencana Studi</span>
                 </a>
             </li>
         </ul>

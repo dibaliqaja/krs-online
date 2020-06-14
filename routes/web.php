@@ -22,5 +22,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
+Route::resource('angkatan', 'AngkatanController');
+Route::resource('semester', 'SemesterController');
+
 Auth::routes();
 
