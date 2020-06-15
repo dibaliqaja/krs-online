@@ -26,7 +26,6 @@ class AngkatanController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -37,7 +36,6 @@ class AngkatanController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
@@ -54,7 +52,6 @@ class AngkatanController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Angkatan  $angkatan
-     * @return \Illuminate\Http\Response
      */
     public function edit(Angkatan $angkatan)
     {
@@ -81,12 +78,10 @@ class AngkatanController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $angkatan = Angkatan::findOrFail($id);
-        $angkatan->delete();
+        Angkatan::findOrFail($id)->delete();
 
         return redirect()->route('angkatan.index')->with('success', 'Angkatan berhasil dihapus.');
     }

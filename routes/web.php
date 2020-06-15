@@ -24,6 +24,7 @@ Route::get('/dashboard', function () {
 
 Route::resource('angkatan', 'AngkatanController');
 Route::resource('semester', 'SemesterController');
+Route::resource('program-studi', 'ProgramStudiController');
 
 Auth::routes();
 

@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('title_page','Edit Semester')
+@section('title_page','Edit Program Studi')
 @section('content')
 
     @if ($errors->any())
@@ -13,16 +13,20 @@
         </div>
     @endif
 
-    <form action="{{ route('semester.update', $semester->id) }}" method="post">
+    <form action="{{ route('program-studi.update', $program_studi->id) }}" method="post">
         @csrf
         @method('patch')
         <div class="form-group">
-            <label for="">Semester</label>
-            <input type="text" class="form-control" name="semester" value="{{ $semester->semester }}">
+            <label for="">Kode Prodi</label>
+            <input type="text" class="form-control" name="kode_prodi" placeholder="T1" value="{{ $program_studi->kode_prodi }}">
+        </div>
+        <div class="form-group">
+            <label for="">Nama Prodi</label>
+            <input type="text" class="form-control" name="nama_prodi" placeholder="Teknik Informatika" value="{{ $program_studi->nama_prodi }}">
         </div>
         <div class="form-group">
             <button class="btn btn-primary">Update</button>
-            <a href="{{ route('semester.index') }}" class="btn btn-danger">Kembali</a>
+            <a href="{{ route('program-studi.index') }}" class="btn btn-danger">Kembali</a>
         </div>
     </form>
 
