@@ -17,11 +17,11 @@
         @csrf
         <div class="form-group">
             <label for="">Kode Prodi</label>
-            <input type="text" class="form-control" name="kode_prodi" placeholder="T1">
+            <input type="text" class="form-control" name="kode_prodi" placeholder="T1" value="{{ old('kode_prodi') }}">
         </div>
         <div class="form-group">
             <label for="">Nama Prodi</label>
-            <input type="text" class="form-control" name="nama_prodi" placeholder="Teknik Informatika">
+            <input type="text" class="form-control" name="nama_prodi" placeholder="Teknik Informatika" value="{{ old('nama_prodi') }}">
         </div>
         <div class="form-group">
             <button class="btn btn-primary">Tambah</button>

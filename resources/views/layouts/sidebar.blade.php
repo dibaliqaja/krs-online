@@ -1,10 +1,10 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">Stisla</a>
+            <a href="index.html">KRS ONLINE</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="index.html">KRS</a>
         </div>
         <ul class="sidebar-menu">
             <li>
@@ -22,12 +22,12 @@
                 </ul>
             </li>
             <li>
-                <a class="nav-link" href="{{ url('/dosen') }}"><i class="fas fa-user"></i>
+                <a class="nav-link" href="{{ url('/dosen') }}"><i class="fas fa-chalkboard-teacher"></i>
                     <span>Dosen</span>
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="{{ url('/mahasiswa') }}"><i class="fas fa-user"></i>
+                <a class="nav-link" href="{{ url('/mahasiswa') }}"><i class="fas fa-user-graduate"></i>
                     <span>Mahasiswa</span>
                 </a>
             </li>

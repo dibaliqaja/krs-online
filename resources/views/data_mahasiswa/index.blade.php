@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('title_page','Data Semester')
+@section('title_page','Data Mahasiswa')
 @section('content')
 
     @if (Session::has('success'))
@@ -24,9 +24,9 @@
 
     <div class="d-flex justify-content-between">
         <div>
-            <a href="{{ route('semester.create') }}" class="btn btn-primary">Tambah Data</a>
+            <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary">Tambah Data</a>
         </div>
-        <form action="{{ route('semester.index') }}">
+        <form action="{{ route('mahasiswa.index') }}">
             <div class="input-group">
                 <input type="text" name="keyword" class="form-control" placeholder="Search" value="{{ Request::get('keyword') }}">
                 <div class="input-group-append">
@@ -42,18 +42,27 @@
             <thead>
                 <tr>
                     <th>No</th>
+                    <th>NPM</th>
+                    <th>Nama</th>
+                    <th>Program Studi</th>
                     <th>Semester</th>
-                    <th>Action</th>
+                    <th>Angkatan</th>
+                    <th width="15%">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($semester as $result => $hasil)
+                @forelse ($mahasiswa as $result => $hasil)
                     <tr>
-                        <td>{{ $result + $semester->firstitem() }}</td>
-                        <td>{{ $hasil->semester }}</td>
+                        <td>{{ $result + $mahasiswa->firstitem() }}</td>
+                        <td>{{ $hasil->npm }}</td>
+                        <td>{{ $hasil->nama }}</td>
+                        <td>{{ $hasil->program_studi->nama_prodi }}</td>
+                        <td>{{ $hasil->semester->semester }}</td>
+                        <td>{{ $hasil->angkatan->angkatan }}</td>
                         <td>
-                            <a href="{{ route('semester.edit', $hasil->id) }}" type="button" class="btn btn-info"><i class="fas fa-pen"></i></a>
-                            <a href="" class="btn btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusSemesterModal"><i class="fas fa-trash"></i></a>
+                            <a href="{{ route('mahasiswa.show', $hasil->id) }}" type="button" class="btn btn-sm btn-warning"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('mahasiswa.edit', $hasil->id) }}" type="button" class="btn btn-sm btn-info"><i class="fas fa-pen"></i></a>
+                            <a href="" class="btn btn-sm btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusMahasiswaModal"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 @empty
@@ -64,21 +73,21 @@
             </tbody>
         </table>
     </div>
-    {{ $semester->links() }}
+    {{ $mahasiswa->links() }}
 
 @endsection
 
 @section('modal')
 
     <!-- Modal Delete -->
-    <div class="modal fade" id="hapusSemesterModal" tabindex="-1" role="dialog">
+    <div class="modal fade" id="hapusMahasiswaModal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <form action="" id="deleteForm" method="post">
                 @csrf
                 @method('delete')
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="vcenter">Hapus Semester</h4>
+                        <h4 class="modal-title" id="vcenter">Hapus Mahasiswa</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -101,7 +110,7 @@
     <script>
     function deleteData(id) {
         var id = id;
-        var url = '{{ route("semester.destroy", ":id") }}';
+        var url = '{{ route("mahasiswa.destroy", ":id") }}';
         url = url.replace(':id', id);
         $("#deleteForm").attr('action', url);
     }

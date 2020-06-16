@@ -17,7 +17,7 @@
         @csrf
         <div class="form-group">
             <label for="">Semester</label>
-            <input type="text" class="form-control" name="semester" placeholder="Semester Genap 0000/0000">
+            <input type="text" class="form-control" name="semester" placeholder="Semester Genap 0000/0000" value="{{ old('semester') }}">
         </div>
         <div class="form-group">
             <button class="btn btn-primary">Tambah</button>

@@ -17,7 +17,7 @@
         @csrf
         <div class="form-group">
             <label for="">Angkatan</label>
-            <input type="text" class="form-control" name="angkatan" placeholder="0000 A">
+            <input type="text" class="form-control" name="angkatan" placeholder="0000 A" value="{{ old('angkatan') }}">
         </div>
         <div class="form-group">
             <button class="btn btn-primary">Tambah</button>

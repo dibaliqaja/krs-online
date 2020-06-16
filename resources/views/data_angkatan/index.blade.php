@@ -52,8 +52,8 @@
                         <td>{{ $result + $angkatan->firstitem() }}</td>
                         <td>{{ $hasil->angkatan }}</td>
                         <td>
-                            <a href="{{ route('angkatan.edit', $hasil->id) }}" type="button" class="btn btn-info">Edit</a>
-                            <a href="" class="btn btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusAngkatanModal">Delete</a>
+                            <a href="{{ route('angkatan.edit', $hasil->id) }}" type="button" class="btn btn-info"><i class="fas fa-pen"></i></a>
+                            <a href="" class="btn btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusAngkatanModal"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 @empty

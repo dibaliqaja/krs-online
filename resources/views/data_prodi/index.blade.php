@@ -54,8 +54,8 @@
                         <td>{{ $hasil->kode_prodi }}</td>
                         <td>{{ $hasil->nama_prodi }}</td>
                         <td>
-                            <a href="{{ route('program-studi.edit', $hasil->id) }}" type="button" class="btn btn-info">Edit</a>
-                            <a href="" class="btn btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusProdiModal">Delete</a>
+                            <a href="{{ route('program-studi.edit', $hasil->id) }}" type="button" class="btn btn-info"><i class="fas fa-pen"></i></a>
+                            <a href="" class="btn btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusProdiModal"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 @empty
