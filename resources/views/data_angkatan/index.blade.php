@@ -41,9 +41,9 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>No</th>
+                    <th width="10%">No</th>
                     <th>Angkatan</th>
-                    <th>Action</th>
+                    <th width="15%">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,8 +52,8 @@
                         <td>{{ $result + $angkatan->firstitem() }}</td>
                         <td>{{ $hasil->angkatan }}</td>
                         <td>
-                            <a href="{{ route('angkatan.edit', $hasil->id) }}" type="button" class="btn btn-info"><i class="fas fa-pen"></i></a>
-                            <a href="" class="btn btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusAngkatanModal"><i class="fas fa-trash"></i></a>
+                            <a href="{{ route('angkatan.edit', $hasil->id) }}" type="button" class="btn btn-sm btn-info"><i class="fas fa-pen"></i></a>
+                            <a href="" class="btn btn-sm btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusAngkatanModal"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 @empty

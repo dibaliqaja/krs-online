@@ -34,4 +34,9 @@ class Dosen extends Model
     protected $hidden = [
         'password',
     ];
+
+    public function mata_kuliah()
+    {
+        return $this->hasMany(MataKuliah::class, 'mata_kuliahs_id');
+    }
 }
