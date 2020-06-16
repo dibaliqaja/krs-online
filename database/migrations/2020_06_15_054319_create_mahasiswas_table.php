@@ -23,12 +23,12 @@ class CreateMahasiswasTable extends Migration
             $table->string('agama');
             $table->text('alamat');
             $table->string('no_hp');
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
             $table->string('email')->unique();
             $table->string('password');
-            $table->unsignedBigInteger('program_studis_id')->nullable();
-            $table->unsignedBigInteger('semesters_id')->nullable();
-            $table->unsignedBigInteger('angkatans_id')->nullable();
+            $table->unsignedBigInteger('program_studis_id');
+            $table->unsignedBigInteger('semesters_id');
+            $table->unsignedBigInteger('angkatans_id');
             $table->timestamps();
 
             $table->foreign('program_studis_id')
@@ -48,7 +48,6 @@ class CreateMahasiswasTable extends Migration
                 ->on('angkatans')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-
         });
     }
 

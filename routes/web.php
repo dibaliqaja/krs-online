@@ -26,6 +26,7 @@ Route::resource('angkatan', 'AngkatanController');
 Route::resource('semester', 'SemesterController');
 Route::resource('program-studi', 'ProgramStudiController');
 Route::resource('mahasiswa', 'MahasiswaController');
+Route::resource('dosen', 'DosenController');
 
 Auth::routes();
 

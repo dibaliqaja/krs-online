@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('title_page','Tambah Mahasiswa')
+@section('title_page','Tambah Dosen')
 @section('content')
 
     @if ($errors->any())
@@ -13,11 +13,11 @@
         </div>
     @endif
 
-    <form action="{{ route('mahasiswa.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('dosen.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <label for="">NPM</label>
-            <input type="text" class="form-control" name="npm" placeholder="0000000000" value="{{ old('npm') }}">
+            <label for="">NIDN</label>
+            <input type="text" class="form-control" name="nidn" placeholder="0000000000" value="{{ old('nidn') }}">
         </div>
         <div class="form-group">
             <label for="">Nama</label>
@@ -63,37 +63,13 @@
             <input type="password" class="form-control" name="password_confirmation" placeholder="********" value="{{ old('password_confirmation') }}">
         </div>
         <div class="form-group">
-            <label for="">Program Studi</label>
-            <select class="form-control select2" name="program_studis_id">
-                @foreach ($prodi as $result)
-                    <option value="{{ $result->id }}">{{ $result->nama_prodi }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="">Semester</label>
-            <select class="form-control select2" name="semesters_id">
-                @foreach ($semester as $result)
-                    <option value="{{ $result->id }}">{{ $result->semester }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="">Angkatan</label>
-            <select class="form-control select2" name="angkatans_id">
-                @foreach ($angkatan as $result)
-                    <option value="{{ $result->id }}">{{ $result->angkatan }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
             <label for="">Profil Image</label>
             <input type="file" class="form-control-file" name="avatar">
             <span class="text-small text-danger font-italic">Max image upload is 1024 kilobytes</span>
         </div>
         <div class="form-group">
             <button class="btn btn-primary">Tambah</button>
-            <a href="{{ route('mahasiswa.index') }}" class="btn btn-danger">Kembali</a>
+            <a href="{{ route('dosen.index') }}" class="btn btn-danger">Kembali</a>
         </div>
     </form>
 

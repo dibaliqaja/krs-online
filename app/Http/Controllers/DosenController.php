@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Angkatan;
-use App\Mahasiswa;
-use App\ProgramStudi;
-use App\Semester;
+use App\Dosen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class MahasiswaController extends Controller
+class DosenController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,38 +15,33 @@ class MahasiswaController extends Controller
      */
     public function index(Request $request)
     {
-        $mahasiswa = Mahasiswa::latest()->paginate(10);
+        $dosen = Dosen::latest()->paginate(10);
         $filterKeyword  = $request->get('keyword');
         if ($filterKeyword) {
-            $mahasiswa = Mahasiswa::where('nama', 'LIKE', "%$filterKeyword%")->paginate(10);
+            $dosen = Dosen::where('nama', 'LIKE', "%$filterKeyword%")->paginate(10);
         }
 
-        return view('data_mahasiswa.index', compact('mahasiswa'));
+        return view('data_dosen.index', compact('dosen'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $prodi = ProgramStudi::all();
-        $semester = Semester::all();
-        $angkatan = Angkatan::all();
-        return view('data_mahasiswa.create', compact('prodi', 'semester', 'angkatan'));
+        return view('data_dosen.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         $this->validate($request, [
-            'npm' => 'required|unique:mahasiswas,npm',
+            'nidn' => 'required|unique:dosens,nidn',
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'tempat_lahir' => 'required',
@@ -57,21 +49,18 @@ class MahasiswaController extends Controller
             'agama' => 'required',
             'alamat' => 'required|min:5',
             'no_hp' => 'required',
-            'email' => 'required|email|unique:mahasiswas,email',
+            'email' => 'required|email|unique:dosens,email',
             'password' => 'required',
             'password_confirmation' => 'required|same:password',
-            'avatar' => 'image|max:1024',
-            'program_studis_id' => 'required',
-            'semesters_id' => 'required',
-            'angkatans_id' => 'required'
+            'avatar' => 'image|max:1024'
         ]);
 
         if ($request->has('avatar')) {
             $avatar = $request->avatar;
             $new_avatar = time().'.'.$avatar->getClientOriginalExtension();
 
-            Mahasiswa::create([
-                'npm' => $request->npm,
+            Dosen::create([
+                'nidn' => $request->nidn,
                 'nama' => $request->nama,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tempat_lahir' => $request->tempat_lahir,
@@ -84,13 +73,13 @@ class MahasiswaController extends Controller
                 'program_studis_id' => $request->program_studis_id,
                 'semesters_id' => $request->semesters_id,
                 'angkatans_id' => $request->angkatans_id,
-                'avatar'      => 'public/uploads/mahasiswa/'.$new_avatar,
+                'avatar'      => 'public/uploads/dosen/'.$new_avatar,
             ]);
 
-            $avatar->move('public/uploads/mahasiswa/', $new_avatar);
+            $avatar->move('public/uploads/dosen/', $new_avatar);
         } else {
-            Mahasiswa::create([
-                'npm' => $request->npm,
+            Dosen::create([
+                'nidn' => $request->nidn,
                 'nama' => $request->nama,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tempat_lahir' => $request->tempat_lahir,
@@ -99,14 +88,11 @@ class MahasiswaController extends Controller
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'program_studis_id' => $request->program_studis_id,
-                'semesters_id' => $request->semesters_id,
-                'angkatans_id' => $request->angkatans_id
+                'password' => Hash::make($request->password)
             ]);
         }
 
-        return redirect()->route('mahasiswa.index')->with('success','Mahasiswa berhasil ditambahkan.');
+        return redirect()->route('dosen.index')->with('success','Dosen berhasil ditambahkan.');
     }
 
     /**
@@ -117,8 +103,8 @@ class MahasiswaController extends Controller
      */
     public function show($id)
     {
-        $mahasiswa = Mahasiswa::with('program_studi', 'semester', 'angkatan')->findOrFail($id);
-        return view('data_mahasiswa.show', compact('mahasiswa'));
+        $dosen = Dosen::findOrFail($id);
+        return view('data_dosen.show', compact('dosen'));
     }
 
     /**
@@ -129,11 +115,8 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        $prodi = ProgramStudi::all();
-        $semester = Semester::all();
-        $angkatan = Angkatan::all();
-        $mahasiswa = Mahasiswa::with('program_studi', 'semester', 'angkatan')->findOrFail($id);
-        return view('data_mahasiswa.edit', compact('prodi', 'semester', 'angkatan', 'mahasiswa'));
+        $dosen = Dosen::findOrFail($id);
+        return view('data_dosen.edit', compact('dosen'));
     }
 
     /**
@@ -141,12 +124,11 @@ class MahasiswaController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'npm' => 'required|unique:mahasiswas,npm,' . $id,
+            'nidn' => 'required|unique:dosens,nidn,' . $id,
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'tempat_lahir' => 'required',
@@ -154,24 +136,21 @@ class MahasiswaController extends Controller
             'agama' => 'required',
             'alamat' => 'required|min:5',
             'no_hp' => 'required',
-            'email' => 'required|email|unique:mahasiswas,email,' . $id,
+            'email' => 'required|email|unique:dosens,email,' . $id,
             'password' => 'required',
             'password_confirmation' => 'required|same:password',
-            'avatar' => 'image|max:1024',
-            'program_studis_id' => 'required',
-            'semesters_id' => 'required',
-            'angkatans_id' => 'required'
+            'avatar' => 'image|max:1024'
         ]);
 
-        $mahasiswa = Mahasiswa::findOrFail($id);
+        $dosen = Dosen::findOrFail($id);
 
         if ($request->has('avatar')) {
             $avatar = $request->avatar;
             $new_avatar = time().'.'.$avatar->getClientOriginalExtension();
-            $avatar->move('public/uploads/mahasiswa/', $new_avatar);
+            $avatar->move('public/uploads/dosen/', $new_avatar);
 
-            $mahasiswa_data = [
-                'npm' => $request->npm,
+            $dosen_data = [
+                'nidn' => $request->nidn,
                 'nama' => $request->nama,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tempat_lahir' => $request->tempat_lahir,
@@ -181,14 +160,11 @@ class MahasiswaController extends Controller
                 'no_hp' => $request->no_hp,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'program_studis_id' => $request->program_studis_id,
-                'semesters_id' => $request->semesters_id,
-                'angkatans_id' => $request->angkatans_id,
-                'avatar'      => 'public/uploads/mahasiswa/'.$new_avatar,
+                'avatar'      => 'public/uploads/dosen/'.$new_avatar,
             ];
         } else {
-            $mahasiswa_data = [
-                'npm' => $request->npm,
+            $dosen_data = [
+                'nidn' => $request->nidn,
                 'nama' => $request->nama,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tempat_lahir' => $request->tempat_lahir,
@@ -198,27 +174,23 @@ class MahasiswaController extends Controller
                 'no_hp' => $request->no_hp,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'program_studis_id' => $request->program_studis_id,
-                'semesters_id' => $request->semesters_id,
-                'angkatans_id' => $request->angkatans_id,
             ];
         }
 
-        $mahasiswa->update($mahasiswa_data);
+        $dosen->update($dosen_data);
 
-        return redirect()->route('mahasiswa.index')->with('success','Mahasiswa berhasil diupdate.');
+        return redirect()->route('dosen.index')->with('success','Dosen berhasil diupdate.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        Mahasiswa::findOrFail($id)->delete();
+        Dosen::findOrFail($id)->delete();
 
-        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil dihapus.');
+        return redirect()->route('dosen.index')->with('success', 'Dosen berhasil dihapus.');
     }
 }

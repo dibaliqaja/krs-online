@@ -90,7 +90,7 @@
         <div class="form-group">
             <label for="">Profil Image</label>
             <input type="file" class="form-control-file" name="avatar">
-            <span class="text-small text-danger font-italic">Max image upload 1024KB</span>
+            <span class="text-small text-danger font-italic">Max image upload is 1024 kilobytes</span>
         </div>
         <div class="form-group">
             <button class="btn btn-primary">Update</button>

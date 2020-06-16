@@ -16,7 +16,11 @@
         <div class="form-group">
             <a href="{{ route('mahasiswa.index') }}" class="btn btn-danger float-right">Kembali</a>
             <label for="">Profil Image</label><br>
-            <img src="{{ asset($mahasiswa->avatar) }}" width="200px" alt="thumbnail" class="rounded">
+            @if ($mahasiswa->avatar === null)
+                <img alt="Profil Image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" width="150px" class="rounded">
+            @else
+                <img alt="Profil Image" src="{{ asset($mahasiswa->avatar) }}" width="150px" class="rounded">
+            @endif
         </div>
         <div class="form-group">
             <label for="">NPM</label>
