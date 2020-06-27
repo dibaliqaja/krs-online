@@ -37,6 +37,6 @@ class Dosen extends Model
 
     public function mata_kuliah()
     {
-        return $this->hasMany(MataKuliah::class, 'mata_kuliahs_id');
+        return $this->hasMany(MataKuliah::class);
     }
 }

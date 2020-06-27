@@ -25,7 +25,6 @@ class CreateDosensTable extends Migration
             $table->string('no_hp');
             $table->string('avatar')->nullable();
             $table->string('email')->unique();
-            $table->string('password');
             $table->timestamps();
         });
     }

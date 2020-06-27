@@ -13,7 +13,7 @@ class Mahasiswa extends Model
      */
     protected $fillable = [
         'npm',
-        'nama',
+        'name',
         'jenis_kelamin',
         'tempat_lahir',
         'tgl_lahir',
@@ -21,12 +21,10 @@ class Mahasiswa extends Model
         'alamat',
         'no_hp',
         'avatar',
-        'email',
-        'password',
-        'avatar',
-        'program_studis_id',
-        'semesters_id',
-        'angkatans_id'
+        'user_id',
+        'program_studi_id',
+        'semester_id',
+        'angkatan_id'
     ];
 
     /**
@@ -38,18 +36,23 @@ class Mahasiswa extends Model
         'password',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function program_studi()
     {
-        return $this->belongsTo(ProgramStudi::class, 'program_studis_id');
+        return $this->belongsTo(ProgramStudi::class);
     }
 
     public function semester()
     {
-        return $this->belongsTo(Semester::class, 'semesters_id');
+        return $this->belongsTo(Semester::class);
     }
 
     public function angkatan()
     {
-        return $this->belongsTo(Angkatan::class, 'angkatans_id');
+        return $this->belongsTo(Angkatan::class);
     }
 }

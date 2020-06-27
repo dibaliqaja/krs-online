@@ -22,13 +22,13 @@
         </div>
         <div class="form-group">
             <label for="">Nama</label>
-            <input type="text" class="form-control" name="nama" placeholder="Adi Gumilang" value="{{ $mahasiswa->nama }}">
+            <input type="text" class="form-control" name="name" placeholder="Adi Gumilang" value="{{ $mahasiswa->user->name }}">
         </div>
         <div class="form-group">
             <label>Jenis Kelamin</label>
             <select class="form-control select2" name="jenis_kelamin">
-                <option value="Laki-Laki" {{ $mahasiswa->jenis_kelamin ? 'selected' : '' }}>Laki-Laki</option>
-                <option value="Perempuan" {{ $mahasiswa->jenis_kelamin ? 'selected' : '' }}>Perempuan</option>
+                <option value="Laki-Laki" {{ "Laki-Laki" == $mahasiswa->jenis_kelamin ? 'selected' : '' }}>Laki-Laki</option>
+                <option value="Perempuan" {{ "Perempuan" == $mahasiswa->jenis_kelamin ? 'selected' : '' }}>Perempuan</option>
             </select>
         </div>
         <div class="form-group">
@@ -53,7 +53,7 @@
         </div>
         <div class="form-group">
             <label for="">Email</label>
-            <input type="email" class="form-control" name="email" placeholder="089000000000" value="{{ $mahasiswa->email }}">
+            <input type="email" class="form-control" name="email" placeholder="089000000000" value="{{ $mahasiswa->user->email }}">
         </div>
         <div class="form-group">
             <label for="">Password</label>

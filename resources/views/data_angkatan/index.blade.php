@@ -26,7 +26,7 @@
         <div>
             <a href="{{ route('angkatan.create') }}" class="btn btn-primary">Tambah Data</a>
         </div>
-        <form action="{{ route('angkatan.index') }}">
+        <form action="{{ route('angkatan.index') }}" class="flex-sm">
             <div class="input-group">
                 <input type="text" name="keyword" class="form-control" placeholder="Search" value="{{ Request::get('keyword') }}">
                 <div class="input-group-append">
@@ -58,7 +58,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td>Tidak ada data.</td>
+                        <td colspan="3">Tidak ada data.</td>
                     </tr>
                 @endforelse
             </tbody>

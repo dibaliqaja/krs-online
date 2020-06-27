@@ -41,9 +41,10 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>No</th>
+                    <th width="10%">No</th>
                     <th>NIDN</th>
                     <th>Nama</th>
+                    <th>Email</th>
                     <th width="15%">Action</th>
                 </tr>
             </thead>
@@ -53,6 +54,7 @@
                         <td>{{ $result + $dosen->firstitem() }}</td>
                         <td>{{ $hasil->nidn }}</td>
                         <td>{{ $hasil->nama }}</td>
+                        <td>{{ $hasil->email }}</td>
                         <td>
                             <a href="{{ route('dosen.show', $hasil->id) }}" type="button" class="btn btn-sm btn-warning"><i class="fas fa-eye"></i></a>
                             <a href="{{ route('dosen.edit', $hasil->id) }}" type="button" class="btn btn-sm btn-info"><i class="fas fa-pen"></i></a>
@@ -61,7 +63,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td>Tidak ada data.</td>
+                        <td colspan="3">Tidak ada data.</td>
                     </tr>
                 @endforelse
             </tbody>

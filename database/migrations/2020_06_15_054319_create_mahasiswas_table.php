@@ -16,7 +16,7 @@ class CreateMahasiswasTable extends Migration
         Schema::create('mahasiswas', function (Blueprint $table) {
             $table->id();
             $table->string('npm')->unique();
-            $table->string('nama');
+            $table->string('name');
             $table->string('jenis_kelamin');
             $table->string('tempat_lahir');
             $table->date('tgl_lahir');
@@ -24,26 +24,31 @@ class CreateMahasiswasTable extends Migration
             $table->text('alamat');
             $table->string('no_hp');
             $table->string('avatar')->nullable();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->unsignedBigInteger('program_studis_id');
-            $table->unsignedBigInteger('semesters_id');
-            $table->unsignedBigInteger('angkatans_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('program_studi_id');
+            $table->unsignedBigInteger('semester_id');
+            $table->unsignedBigInteger('angkatan_id');
             $table->timestamps();
 
-            $table->foreign('program_studis_id')
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('program_studi_id')
                 ->references('id')
                 ->on('program_studis')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('semesters_id')
+            $table->foreign('semester_id')
                 ->references('id')
                 ->on('semesters')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('angkatans_id')
+            $table->foreign('angkatan_id')
                 ->references('id')
                 ->on('angkatans')
                 ->onDelete('cascade')

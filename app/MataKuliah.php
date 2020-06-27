@@ -10,11 +10,18 @@ class MataKuliah extends Model
         'kode_matkul',
         'nama_matkul',
         'sks',
-        'dosens_id'
+        'dosen_id',
+        'semester',
+        'program_studi_id'
     ];
 
     public function dosen()
     {
-        return $this->belongsTo(Dosen::class, 'dosens_id');
+        return $this->belongsTo(Dosen::class);
+    }
+
+    public function program_studi()
+    {
+        return $this->belongsTo(ProgramStudi::class);
     }
 }

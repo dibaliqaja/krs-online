@@ -41,7 +41,7 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>No</th>
+                    <th width="10%">No</th>
                     <th>NPM</th>
                     <th>Nama</th>
                     <th>Program Studi</th>
@@ -55,7 +55,7 @@
                     <tr>
                         <td>{{ $result + $mahasiswa->firstitem() }}</td>
                         <td>{{ $hasil->npm }}</td>
-                        <td>{{ $hasil->nama }}</td>
+                        <td>{{ $hasil->user->name }}</td>
                         <td>{{ $hasil->program_studi->nama_prodi }}</td>
                         <td>{{ $hasil->semester->semester }}</td>
                         <td>{{ $hasil->angkatan->angkatan }}</td>
@@ -67,7 +67,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td>Tidak ada data.</td>
+                        <td colspan="3">Tidak ada data.</td>
                     </tr>
                 @endforelse
             </tbody>

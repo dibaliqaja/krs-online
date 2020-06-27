@@ -21,7 +21,7 @@
         </div>
         <div class="form-group">
             <label for="">Nama</label>
-            <input type="text" class="form-control" name="nama" placeholder="Adi Gumilang" value="{{ old('nama') }}">
+            <input type="text" class="form-control" name="name" placeholder="Adi Gumilang" value="{{ old('name') }}">
         </div>
         <div class="form-group">
             <label>Jenis Kelamin</label>

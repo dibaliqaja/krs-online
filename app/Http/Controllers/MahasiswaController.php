@@ -6,6 +6,7 @@ use App\Angkatan;
 use App\Mahasiswa;
 use App\ProgramStudi;
 use App\Semester;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -50,14 +51,14 @@ class MahasiswaController extends Controller
     {
         $this->validate($request, [
             'npm' => 'required|unique:mahasiswas,npm',
-            'nama' => 'required',
+            'name' => 'required',
             'jenis_kelamin' => 'required',
             'tempat_lahir' => 'required',
             'tgl_lahir' => 'required|date',
             'agama' => 'required',
             'alamat' => 'required|min:5',
             'no_hp' => 'required',
-            'email' => 'required|email|unique:mahasiswas,email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required',
             'password_confirmation' => 'required|same:password',
             'avatar' => 'image|max:1024',
@@ -66,43 +67,47 @@ class MahasiswaController extends Controller
             'angkatans_id' => 'required'
         ]);
 
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
         if ($request->has('avatar')) {
             $avatar = $request->avatar;
             $new_avatar = time().'.'.$avatar->getClientOriginalExtension();
 
             Mahasiswa::create([
                 'npm' => $request->npm,
-                'nama' => $request->nama,
+                'name' => $request->name,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tempat_lahir' => $request->tempat_lahir,
                 'tgl_lahir' => $request->tgl_lahir,
                 'agama' => $request->agama,
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'program_studis_id' => $request->program_studis_id,
-                'semesters_id' => $request->semesters_id,
-                'angkatans_id' => $request->angkatans_id,
+                'program_studi_id' => $request->program_studis_id,
+                'semester_id' => $request->semesters_id,
+                'angkatan_id' => $request->angkatans_id,
                 'avatar'      => 'public/uploads/mahasiswa/'.$new_avatar,
+                'user_id' => $user->id
             ]);
 
             $avatar->move('public/uploads/mahasiswa/', $new_avatar);
         } else {
             Mahasiswa::create([
                 'npm' => $request->npm,
-                'nama' => $request->nama,
+                'name' => $request->name,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tempat_lahir' => $request->tempat_lahir,
                 'tgl_lahir' => $request->tgl_lahir,
                 'agama' => $request->agama,
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'program_studis_id' => $request->program_studis_id,
-                'semesters_id' => $request->semesters_id,
-                'angkatans_id' => $request->angkatans_id
+                'program_studi_id' => $request->program_studis_id,
+                'semester_id' => $request->semesters_id,
+                'angkatan_id' => $request->angkatans_id,
+                'user_id' => $user->id
             ]);
         }
 
@@ -147,14 +152,14 @@ class MahasiswaController extends Controller
     {
         $this->validate($request, [
             'npm' => 'required|unique:mahasiswas,npm,' . $id,
-            'nama' => 'required',
+            'name' => 'required',
             'jenis_kelamin' => 'required',
             'tempat_lahir' => 'required',
             'tgl_lahir' => 'required|date',
             'agama' => 'required',
             'alamat' => 'required|min:5',
             'no_hp' => 'required',
-            'email' => 'required|email|unique:mahasiswas,email,' . $id,
+            'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'required',
             'password_confirmation' => 'required|same:password',
             'avatar' => 'image|max:1024',
@@ -164,6 +169,7 @@ class MahasiswaController extends Controller
         ]);
 
         $mahasiswa = Mahasiswa::findOrFail($id);
+        $user = User::findOrFail($mahasiswa->user->id);
 
         if ($request->has('avatar')) {
             $avatar = $request->avatar;
@@ -172,39 +178,48 @@ class MahasiswaController extends Controller
 
             $mahasiswa_data = [
                 'npm' => $request->npm,
-                'nama' => $request->nama,
+                'name' => $request->name,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tempat_lahir' => $request->tempat_lahir,
                 'tgl_lahir' => $request->tgl_lahir,
                 'agama' => $request->agama,
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
+                'program_studi_id' => $request->program_studis_id,
+                'semester_id' => $request->semesters_id,
+                'angkatan_id' => $request->angkatans_id,
+                'avatar'      => 'public/uploads/mahasiswa/'.$new_avatar,
+            ];
+
+            $user_data = [
+                'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'program_studis_id' => $request->program_studis_id,
-                'semesters_id' => $request->semesters_id,
-                'angkatans_id' => $request->angkatans_id,
-                'avatar'      => 'public/uploads/mahasiswa/'.$new_avatar,
             ];
         } else {
             $mahasiswa_data = [
                 'npm' => $request->npm,
-                'nama' => $request->nama,
+                'name' => $request->name,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tempat_lahir' => $request->tempat_lahir,
                 'tgl_lahir' => $request->tgl_lahir,
                 'agama' => $request->agama,
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
+                'program_studi_id' => $request->program_studis_id,
+                'semester_id' => $request->semesters_id,
+                'angkatan_id' => $request->angkatans_id,
+            ];
+
+            $user_data = [
+                'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'program_studis_id' => $request->program_studis_id,
-                'semesters_id' => $request->semesters_id,
-                'angkatans_id' => $request->angkatans_id,
             ];
         }
 
         $mahasiswa->update($mahasiswa_data);
+        $user->update($user_data);
 
         return redirect()->route('mahasiswa.index')->with('success','Mahasiswa berhasil diupdate.');
     }

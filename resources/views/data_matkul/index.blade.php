@@ -41,11 +41,13 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Kode Matkul</th>
+                    <th width="3%">No</th>
+                    <th width="10%">Kode Matkul</th>
                     <th>Nama Matkul</th>
-                    <th>SKS</th>
+                    <th width="3%">SKS</th>
+                    <th width="7%">Semester</th>
                     <th>Pengajar</th>
+                    <th>Program Studi</th>
                     <th width="15%">Action</th>
                 </tr>
             </thead>
@@ -56,7 +58,9 @@
                         <td>{{ $hasil->kode_matkul }}</td>
                         <td>{{ $hasil->nama_matkul }}</td>
                         <td>{{ $hasil->sks }}</td>
+                        <td>{{ $hasil->semester }}</td>
                         <td>{{ $hasil->dosen->nama }}</td>
+                        <td>{{ $hasil->program_studi->nama_prodi }}</td>
                         <td>
                             <a href="{{ route('mata-kuliah.edit', $hasil->id) }}" type="button" class="btn btn-sm btn-info"><i class="fas fa-pen"></i></a>
                             <a href="" class="btn btn-sm btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusMatkulModal"><i class="fas fa-trash"></i></a>
@@ -64,7 +68,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td>Tidak ada data.</td>
+                        <td colspan="3">Tidak ada data.</td>
                     </tr>
                 @endforelse
             </tbody>

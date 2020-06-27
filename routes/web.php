@@ -29,5 +29,10 @@ Route::resource('mata-kuliah', 'MataKuliahController');
 Route::resource('mahasiswa', 'MahasiswaController');
 Route::resource('dosen', 'DosenController');
 
+Route::get('kartu-rencana-studi/mahasiswa', 'KartuRencanaStudiController@indexMahasiswa')->name('mahasiswa.krs');
+Route::post('kartu-rencana-studi/mahasiswa', 'KartuRencanaStudiController@store')->name('mahasiswa.krs.store');
+Route::get('kartu-rencana-studi/admin', 'KartuRencanaStudiController@indexAdmin')->name('admin.krs');
+Route::post('kartu-rencana-studi/admin/{id}', 'KartuRencanaStudiController@update')->name('admin.krs.update');
+
 Auth::routes();
 

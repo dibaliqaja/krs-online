@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Dosen;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class DosenController extends Controller
 {
@@ -50,8 +49,6 @@ class DosenController extends Controller
             'alamat' => 'required|min:5',
             'no_hp' => 'required',
             'email' => 'required|email|unique:dosens,email',
-            'password' => 'required',
-            'password_confirmation' => 'required|same:password',
             'avatar' => 'image|max:1024'
         ]);
 
@@ -69,10 +66,9 @@ class DosenController extends Controller
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
-                'program_studis_id' => $request->program_studis_id,
-                'semesters_id' => $request->semesters_id,
-                'angkatans_id' => $request->angkatans_id,
+                'program_studi_id' => $request->program_studis_id,
+                'semester_id' => $request->semesters_id,
+                'angkatan_id' => $request->angkatans_id,
                 'avatar'      => 'public/uploads/dosen/'.$new_avatar,
             ]);
 
@@ -87,8 +83,7 @@ class DosenController extends Controller
                 'agama' => $request->agama,
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
-                'email' => $request->email,
-                'password' => Hash::make($request->password)
+                'email' => $request->email
             ]);
         }
 
@@ -137,8 +132,6 @@ class DosenController extends Controller
             'alamat' => 'required|min:5',
             'no_hp' => 'required',
             'email' => 'required|email|unique:dosens,email,' . $id,
-            'password' => 'required',
-            'password_confirmation' => 'required|same:password',
             'avatar' => 'image|max:1024'
         ]);
 
@@ -159,7 +152,6 @@ class DosenController extends Controller
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
                 'avatar'      => 'public/uploads/dosen/'.$new_avatar,
             ];
         } else {
@@ -173,7 +165,6 @@ class DosenController extends Controller
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
             ];
         }
 

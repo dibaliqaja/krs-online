@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             <label for="">Nama</label>
-            <input type="text" class="form-control" name="nama" value="{{ $mahasiswa->nama }}" readonly>
+            <input type="text" class="form-control" name="nama" value="{{ $mahasiswa->user->name }}" readonly>
         </div>
         <div class="form-group">
             <label for="">Jenis Kelamin</label>
@@ -56,7 +56,7 @@
         </div>
         <div class="form-group">
             <label for="">Email</label>
-            <input type="email" class="form-control" name="email" value="{{ $mahasiswa->email }}" readonly>
+            <input type="email" class="form-control" name="email" value="{{ $mahasiswa->user->email }}" readonly>
         </div>
         <div class="form-group">
             <label for="">Program Studi</label>

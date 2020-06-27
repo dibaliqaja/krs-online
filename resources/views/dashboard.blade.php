@@ -9,52 +9,52 @@
                 <div class="hero bg-primary text-white">
                     <div class="hero-inner">
                         <h2>Welcome Back, {{-- Auth::user()->name --}} Admin</h2>
-                        <p class="lead">This website is a place to manage provinces, cities, areas and more.</p>
+                        <p class="lead">This website is a for managing Campus Academic Information Systems.</p>
                     </div>
                 </div>
             </div>
         {{-- @endif --}}
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
             <div class="card card-statistic-1">
                 <div class="card-icon bg-info">
-                    <i class="fas fa-file-signature"></i>
-                </div>
-                <div class="card-wrap">
-                    <div class="card-header">
-                        <h4>Dosen</h4>
-                    </div>
-                    <div class="card-body">
-                        {{-- {{ DB::table('provinces')->count() }} --}}20
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-            <div class="card card-statistic-1">
-                <div class="card-icon bg-info">
-                    <i class="fas fa-file-signature"></i>
-                </div>
-                <div class="card-wrap">
-                    <div class="card-header">
-                        <h4>Mahasiswa</h4>
-                    </div>
-                    <div class="card-body">
-                        {{-- {{ DB::table('cities')->count() }} --}}30
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-            <div class="card card-statistic-1">
-                <div class="card-icon bg-info">
-                    <i class="fas fa-file-signature"></i>
+                    <i class="fas fa-building"></i>
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
                         <h4>Program Studi</h4>
                     </div>
                     <div class="card-body">
-                        {{-- {{ DB::table('areas')->count() }} --}}33
+                        {{ DB::table('program_studis')->count() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="card card-statistic-1">
+                <div class="card-icon bg-info">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h4>Mahasiswa</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ DB::table('mahasiswas')->count() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+            <div class="card card-statistic-1">
+                <div class="card-icon bg-info">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="card-wrap">
+                    <div class="card-header">
+                        <h4>Dosen</h4>
+                    </div>
+                    <div class="card-body">
+                        {{ DB::table('dosens')->count() }}
                     </div>
                 </div>
             </div>

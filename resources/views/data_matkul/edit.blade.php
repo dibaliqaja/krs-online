@@ -29,10 +29,31 @@
             <input type="number" min="1" class="form-control" name="sks" value="{{ $matkul->sks }}">
         </div>
         <div class="form-group">
+            <label for="">Semester</label>
+            <select name="semester" class="form-control select2">
+                <option value="1" {{ 1 == $matkul->semester ? 'selected' : '' }}>1</option>
+                <option value="2" {{ 2 == $matkul->semester ? 'selected' : '' }}>2</option>
+                <option value="3" {{ 3 == $matkul->semester ? 'selected' : '' }}>3</option>
+                <option value="4" {{ 4 == $matkul->semester ? 'selected' : '' }}>4</option>
+                <option value="5" {{ 5 == $matkul->semester ? 'selected' : '' }}>5</option>
+                <option value="6" {{ 6 == $matkul->semester ? 'selected' : '' }}>6</option>
+                <option value="7" {{ 7 == $matkul->semester ? 'selected' : '' }}>7</option>
+                <option value="8" {{ 8 == $matkul->semester ? 'selected' : '' }}>8</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="">Pengajar</label>
             <select class="form-control select2" name="dosens_id">
                 @foreach ($dosen as $result)
                     <option value="{{ $result->id }}" {{ $result->id == $matkul->dosens_id ? 'selected' : '' }}>{{ $result->nama }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Program Studi</label>
+            <select class="form-control select2" name="program_studis_id">
+                @foreach ($prodi as $result)
+                    <option value="{{ $result->id }}" {{ $result->id == $matkul->program_studis_id ? 'selected' : '' }}>{{ $result->nama_prodi }}</option>
                 @endforeach
             </select>
         </div>

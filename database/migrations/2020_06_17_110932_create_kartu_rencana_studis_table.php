@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMataKuliahsTable extends Migration
+class CreateKartuRencanaStudisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,22 @@ class CreateMataKuliahsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mata_kuliahs', function (Blueprint $table) {
+        Schema::create('kartu_rencana_studis', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_matkul')->unique();
-            $table->string('nama_matkul');
-            $table->string('sks');
-            $table->integer('semester');
-            $table->unsignedBigInteger('dosen_id');
-            $table->unsignedBigInteger('program_studi_id');
+            $table->unsignedBigInteger('mahasiswa_id');
+            $table->unsignedBigInteger('mata_kuliah_id');
+            $table->enum('status',['PENGAJUAN', 'DITERIMA']);
             $table->timestamps();
 
-            $table->foreign('dosen_id')
+            $table->foreign('mahasiswa_id')
                 ->references('id')
-                ->on('dosens')
+                ->on('mahasiswas')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('program_studi_id')
+            $table->foreign('mata_kuliah_id')
                 ->references('id')
-                ->on('program_studis')
+                ->on('mata_kuliahs')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -44,6 +41,6 @@ class CreateMataKuliahsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mata_kuliahs');
+        Schema::dropIfExists('kartu_rencana_studis');
     }
 }

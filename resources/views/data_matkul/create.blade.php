@@ -28,10 +28,31 @@
             <input type="number" min="1" class="form-control" name="sks" value="{{ old('sks') }}">
         </div>
         <div class="form-group">
+            <label for="">Semester</label>
+            <select name="semester" class="form-control select2">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="">Pengajar</label>
             <select class="form-control select2" name="dosens_id">
                 @foreach ($dosen as $result)
                     <option value="{{ $result->id }}">{{ $result->nama }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="">Program Studi</label>
+            <select class="form-control select2" name="program_studis_id">
+                @foreach ($prodi as $result)
+                    <option value="{{ $result->id }}">{{ $result->nama_prodi }}</option>
                 @endforeach
             </select>
         </div>

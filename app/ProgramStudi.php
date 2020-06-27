@@ -12,4 +12,9 @@ class ProgramStudi extends Model
     {
         return $this->hasMany(Mahasiswa::class);
     }
+
+    public function mata_kuliah()
+    {
+        return $this->hasMany(MataKuliah::class);
+    }
 }

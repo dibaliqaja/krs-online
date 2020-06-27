@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Dosen;
 use App\MataKuliah;
+use App\ProgramStudi;
 use Illuminate\Http\Request;
 
 class MataKuliahController extends Controller
@@ -32,7 +33,8 @@ class MataKuliahController extends Controller
     public function create()
     {
         $dosen = Dosen::all();
-        return view('data_matkul.create', compact('dosen'));
+        $prodi = ProgramStudi::all();
+        return view('data_matkul.create', compact('dosen', 'prodi'));
     }
 
     /**
@@ -46,14 +48,18 @@ class MataKuliahController extends Controller
             'kode_matkul' => 'required|unique:mata_kuliahs,kode_matkul',
             'nama_matkul' => 'required',
             'sks' => 'required',
-            'dosens_id' => 'required'
+            'semester' => 'required',
+            'dosens_id' => 'required',
+            'program_studis_id' => 'required'
         ]);
 
         MataKuliah::create([
             'kode_matkul' => $request->kode_matkul,
             'nama_matkul' => $request->nama_matkul,
             'sks' => $request->sks,
-            'dosens_id' => $request->dosens_id
+            'semester' => $request->semester,
+            'dosen_id' => $request->dosens_id,
+            'program_studi_id' => $request->program_studis_id
         ]);
 
         return redirect()->route('mata-kuliah.index')->with('success','Mata Kuliah berhasil ditambahkan.');
@@ -67,8 +73,9 @@ class MataKuliahController extends Controller
     public function edit($id)
     {
         $dosen = Dosen::all();
+        $prodi = ProgramStudi::all();
         $matkul = MataKuliah::findOrFail($id);
-        return view('data_matkul.edit', compact('dosen', 'matkul'));
+        return view('data_matkul.edit', compact('dosen', 'prodi', 'matkul'));
     }
 
     /**
@@ -83,7 +90,9 @@ class MataKuliahController extends Controller
             'kode_matkul' => 'required|unique:mata_kuliahs,kode_matkul,' . $id,
             'nama_matkul' => 'required',
             'sks' => 'required',
-            'dosens_id' => 'required'
+            'semester' => 'required',
+            'dosens_id' => 'required',
+            'program_studis_id' => 'required'
         ]);
 
         $matkul = MataKuliah::findOrFail($id);
@@ -91,7 +100,9 @@ class MataKuliahController extends Controller
             'kode_matkul' => $request->kode_matkul,
             'nama_matkul' => $request->nama_matkul,
             'sks' => $request->sks,
-            'dosens_id' => $request->dosens_id
+            'semester' => $request->semester,
+            'dosen_id' => $request->dosens_id,
+            'program_studi_id' => $request->program_studis_id
         ]);
 
         return redirect()->route('mata-kuliah.index')->with('success','Mata Kuliah berhasil diupdate.');
