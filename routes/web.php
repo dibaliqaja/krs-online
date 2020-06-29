@@ -13,26 +13,48 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/login','AuthController@login')->name('login');
+Route::post('/postlogin','AuthController@postlogin');
+Route::get('/logout','AuthController@logout')->name('logout');
+
+Route::group(['middleware' => ['auth', 'CheckRole:mahasiswa']], function () {
+
+    Route::get('/', function () {   
+        return view('dashboard');
+    });
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
+
+    Route::get('kartu-rencana-studi/mahasiswa', 'KartuRencanaStudiController@indexMahasiswa')->name('mahasiswa.krs');
+    Route::post('kartu-rencana-studi/mahasiswa', 'KartuRencanaStudiController@store')->name('mahasiswa.krs.store');
+
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::group(['middleware' => ['auth', 'CheckRole:admin']], function () {
+
+    Route::get('/', function () {
+        return view('dashboard');
+    });
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
+
+    Route::resource('angkatan', 'AngkatanController');
+    Route::resource('semester', 'SemesterController');
+    Route::resource('program-studi', 'ProgramStudiController');
+    Route::resource('mata-kuliah', 'MataKuliahController');
+    Route::resource('mahasiswa', 'MahasiswaController');
+    Route::resource('dosen', 'DosenController');
+
+    Route::get('kartu-rencana-studi/admin', 'KartuRencanaStudiController@indexAdmin')->name('admin.krs');
+    Route::post('kartu-rencana-studi/admin/{id}', 'KartuRencanaStudiController@update')->name('admin.krs.update');
+    Route::delete('kartu-rencana-studi/admin/{id}', 'KartuRencanaStudiController@destroy')->name('admin.krs.destroy');
 });
 
-Route::resource('angkatan', 'AngkatanController');
-Route::resource('semester', 'SemesterController');
-Route::resource('program-studi', 'ProgramStudiController');
-Route::resource('mata-kuliah', 'MataKuliahController');
-Route::resource('mahasiswa', 'MahasiswaController');
-Route::resource('dosen', 'DosenController');
-
-Route::get('kartu-rencana-studi/mahasiswa', 'KartuRencanaStudiController@indexMahasiswa')->name('mahasiswa.krs');
-Route::post('kartu-rencana-studi/mahasiswa', 'KartuRencanaStudiController@store')->name('mahasiswa.krs.store');
-Route::get('kartu-rencana-studi/admin', 'KartuRencanaStudiController@indexAdmin')->name('admin.krs');
-Route::post('kartu-rencana-studi/admin/{id}', 'KartuRencanaStudiController@update')->name('admin.krs.update');
-
-Auth::routes();
+// Auth::routes();
 

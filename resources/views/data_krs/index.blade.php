@@ -22,7 +22,7 @@
     </div>
     @endif
 
-    <div class="d-flex justify-content-between">
+    {{-- <div class="d-flex justify-content-between">
         <form action="{{ route('mahasiswa.krs') }}">
             <div class="input-group">
                 <input type="text" name="keyword" class="form-control" placeholder="Search" value="{{ Request::get('keyword') }}">
@@ -31,6 +31,46 @@
                 </div>
             </div>
         </form>
+        <form action="{{ route('mahasiswa.krs.store') }}" method="POST">
+            @csrf
+            <button class="btn btn-primary" type="submit">Ambil KRS</button>
+    </div>
+    <br> --}}
+    <div class="row">
+        <div class="col-md-5">
+            <form action="{{ route('mahasiswa.krs') }}">
+                <div class="input-group">
+                    <input type="text" name="keyword" class="form-control" placeholder="Search" value="{{ Request::get('keyword') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-5">
+            <form action="{{ route('mahasiswa.krs') }}">
+                    <select name="prodi" id="prodi" class="form-control">
+                        <option value="">Program Studi</option>
+                        @foreach ($program_studi as $item)
+                            <option {{ Request::get('prodi') == $item->id ? "selected" : "" }} value="{{ $item->id }}">{{ $item->nama_prodi }}</option>
+                        @endforeach
+                    </select>
+                    <br>
+                <select name="semester" id="semester" class="form-control">
+                    <option value="">Semester</option>
+                    <option {{ Request::get('semester') == "1" ? "selected" : "" }} value="1">1</option>
+                    <option {{ Request::get('semester') == "2" ? "selected" : "" }} value="2">2</option>
+                    <option {{ Request::get('semester') == "3" ? "selected" : "" }} value="3">3</option>
+                    <option {{ Request::get('semester') == "4" ? "selected" : "" }} value="4">4</option>
+                    <option {{ Request::get('semester') == "5" ? "selected" : "" }} value="5">5</option>
+                    <option {{ Request::get('semester') == "6" ? "selected" : "" }} value="6">6</option>
+                    <option {{ Request::get('semester') == "7" ? "selected" : "" }} value="7">7</option>
+                    <option {{ Request::get('semester') == "8" ? "selected" : "" }} value="8">8</option>
+                </select>
+                <br>
+                    <input type="submit" value="Filter" class="btn btn-primary">
+            </form>
+        </div>
         <form action="{{ route('mahasiswa.krs.store') }}" method="POST">
             @csrf
             <button class="btn btn-primary" type="submit">Ambil KRS</button>

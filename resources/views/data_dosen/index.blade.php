@@ -22,18 +22,20 @@
     </div>
     @endif
 
-    <div class="d-flex justify-content-between">
-        <div>
-            <a href="{{ route('dosen.create') }}" class="btn btn-primary">Tambah Data</a>
-        </div>
-        <form action="{{ route('dosen.index') }}">
-            <div class="input-group">
-                <input type="text" name="keyword" class="form-control" placeholder="Search" value="{{ Request::get('keyword') }}">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+    <div>
+        <a href="{{ route('dosen.create') }}" class="btn btn-primary">Tambah Data</a><br><br>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form action="{{ route('dosen.index') }}" class="flex-sm">
+                <div class="input-group">
+                    <input type="text" name="keyword" class="form-control" placeholder="Search" value="{{ Request::get('keyword') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
     <br>
 

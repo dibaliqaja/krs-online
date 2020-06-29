@@ -7,6 +7,7 @@
             <a href="index.html">KRS</a>
         </div>
         <ul class="sidebar-menu">
+            @if (auth()->user()->role == 'admin')
             <li>
                 <a class="nav-link" href="{{ url('/dashboard') }}"><i class="fas fa-fire"></i>
                     <span>Dashboard</span>
@@ -32,10 +33,18 @@
                 </a>
             </li>
             <li>
-                <a class="nav-link" href="{{ url('/kartu-rencana-studi') }}"><i class="fas fa-id-card"></i>
+                <a class="nav-link" href="{{ route('admin.krs') }}"><i class="fas fa-id-card"></i>
                     <span>Kartu Rencana Studi</span>
                 </a>
             </li>
+            @endif
+            @if (auth()->user()->role == 'mahasiswa')
+            <li>
+                <a class="nav-link" href="{{ route('mahasiswa.krs') }}"><i class="fas fa-id-card"></i>
+                    <span>Kartu Rencana Studi</span>
+                </a>
+            </li>
+            @endif
         </ul>
 
     </aside>

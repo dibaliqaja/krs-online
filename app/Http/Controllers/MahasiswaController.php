@@ -68,9 +68,11 @@ class MahasiswaController extends Controller
         ]);
 
         $user = User::create([
+            'npm' => $request->npm,
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'mahasiswa'
         ]);
 
         if ($request->has('avatar')) {

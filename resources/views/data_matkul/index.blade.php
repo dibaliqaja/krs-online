@@ -22,18 +22,20 @@
     </div>
     @endif
 
-    <div class="d-flex justify-content-between">
-        <div>
-            <a href="{{ route('mata-kuliah.create') }}" class="btn btn-primary">Tambah Data</a>
-        </div>
-        <form action="{{ route('mata-kuliah.index') }}">
-            <div class="input-group">
-                <input type="text" name="keyword" class="form-control" placeholder="Search" value="{{ Request::get('keyword') }}">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+    <div>
+        <a href="{{ route('mata-kuliah.create') }}" class="btn btn-primary">Tambah Data</a><br><br>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form action="{{ route('mata-kuliah.index') }}" class="flex-sm">
+                <div class="input-group">
+                    <input type="text" name="keyword" class="form-control" placeholder="Search" value="{{ Request::get('keyword') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
     <br>
 
@@ -43,12 +45,12 @@
                 <tr>
                     <th width="3%">No</th>
                     <th width="10%">Kode Matkul</th>
-                    <th>Nama Matkul</th>
+                    <th width="15%">Nama Matkul</th>
                     <th width="3%">SKS</th>
-                    <th width="7%">Semester</th>
+                    <th width="5%">Semester</th>
                     <th>Pengajar</th>
                     <th>Program Studi</th>
-                    <th width="15%">Action</th>
+                    <th width="13%">Action</th>
                 </tr>
             </thead>
             <tbody>
