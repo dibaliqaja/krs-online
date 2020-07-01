@@ -68,7 +68,7 @@ class MahasiswaController extends Controller
         ]);
 
         $user = User::create([
-            'npm' => $request->npm,
+            'username' => $request->npm,
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -234,7 +234,9 @@ class MahasiswaController extends Controller
      */
     public function destroy($id)
     {
-        Mahasiswa::findOrFail($id)->delete();
+        $mahasiswa = Mahasiswa::with('user')->findOrFail($id);
+        $mahasiswa->user->delete();
+        $mahasiswa->delete();
 
         return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa berhasil dihapus.');
     }

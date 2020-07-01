@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\KartuRencanaStudi;
+use App\Mahasiswa;
 use App\MataKuliah;
 use App\ProgramStudi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class KartuRencanaStudiController extends Controller
@@ -17,23 +19,43 @@ class KartuRencanaStudiController extends Controller
      */
     public function indexMahasiswa(Request $request)
     {
-        $program_studi = ProgramStudi::all();
-        $prodi = $request->get('prodi');
+        $prodi = Auth::user()->mahasiswa->program_studi_id;
         $semester = $request->get('semester');
-        $matkul = MataKuliah::latest()->paginate(10);
+        $matkul = MataKuliah::with('program_studi')->where('program_studi_id', $prodi)->paginate(10);
         $filterKeyword  = $request->get('keyword');
         if ($filterKeyword) {
-            $matkul = MataKuliah::where('nama_matkul', 'LIKE', "%$filterKeyword%")->paginate(10);
-        }
-
-        if ($prodi && $semester) {
             $matkul = MataKuliah::with('program_studi')
                     ->where('program_studi_id', $prodi)
-                    ->where('semester', $semester)
+                    ->where('nama_matkul', 'LIKE', "%$filterKeyword%")
                     ->paginate(10);
         }
 
-        return view('data_krs.index', compact('matkul', 'program_studi'));
+        // if ($prodi && $semester) {
+        //     $matkul = MataKuliah::with('program_studi')
+        //             ->where('program_studi_id', $prodi)
+        //             ->where('semester', $semester)
+        //             ->paginate(10);
+        // }
+
+        return view('data_krs.index', compact('matkul'));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Request
+     */
+    public function indexMahasiswaHasil(Request $request)
+    {
+        $user = Auth::user()->mahasiswa->id;
+        $semester = $request->get('semester');
+        $krs = KartuRencanaStudi::with('mahasiswa')->with('mata_kuliah')
+                    ->leftJoin('mahasiswas', 'mahasiswas.id', '=', 'kartu_rencana_studis.mahasiswa_id')
+                    ->leftJoin('mata_kuliahs', 'mata_kuliahs.id', '=', 'kartu_rencana_studis.mata_kuliah_id')
+                    ->where('mahasiswa_id', $user)
+                    ->paginate(10);
+
+        return view('data_krs.hasil', compact('krs'));
     }
 
     /**
@@ -50,30 +72,32 @@ class KartuRencanaStudiController extends Controller
         $keyword = $request->get('keyword') ? $request->get('keyword') : '';
 
         if ($status) {
-            $krs = KartuRencanaStudi::with('mahasiswa')->with('mata_kuliah')
-                    ->leftJoin('mahasiswas', 'mahasiswas.id', '=', 'kartu_rencana_studis.mahasiswa_id')
-                    ->leftJoin('mata_kuliahs', 'mata_kuliahs.id', '=', 'kartu_rencana_studis.mata_kuliah_id')
-                    ->where('mahasiswas.npm', "LIKE", "%$keyword%")
-                    ->where('status', $status)
-                    ->paginate(10);
-        } else {
-            $krs = KartuRencanaStudi::with('mahasiswa')->with('mata_kuliah')
+            $krs = DB::table('kartu_rencana_studis')
+                ->select('kartu_rencana_studis.id as id', 'mahasiswas.npm as npm', 'mahasiswas.name as name', 'mata_kuliahs.kode_matkul as kode_matkul', 'mata_kuliahs.nama_matkul as nama_matkul', 'kartu_rencana_studis.status as status', 'mahasiswas.program_studi_id as prodi', 'mata_kuliahs.semester as semester')
+                ->leftJoin('mahasiswas', 'mahasiswas.id', '=', 'kartu_rencana_studis.mahasiswa_id')
+                ->leftJoin('mata_kuliahs', 'mata_kuliahs.id', '=', 'kartu_rencana_studis.mata_kuliah_id')
+                ->where('mahasiswas.npm', "LIKE", "%$keyword%")
+                ->where('status', $status)
+                ->paginate(10);
+        }
+        // else if ($status && $prodi && $semester) {
+        //     $krs = DB::table('kartu_rencana_studis')
+        //         ->select('kartu_rencana_studis.id as id', 'mahasiswas.npm as npm', 'mahasiswas.name as name', 'mata_kuliahs.kode_matkul as kode_matkul', 'mata_kuliahs.nama_matkul as nama_matkul', 'kartu_rencana_studis.status as status', 'mahasiswas.program_studi_id as prodi', 'mata_kuliahs.semester as semester')
+        //         ->leftJoin('mahasiswas', 'mahasiswas.id', '=', 'kartu_rencana_studis.mahasiswa_id')
+        //         ->leftJoin('mata_kuliahs', 'mata_kuliahs.id', '=', 'kartu_rencana_studis.mata_kuliah_id')
+        //         ->where('mahasiswas.npm', "LIKE", "%$keyword%")
+        //         ->where('mahasiswas.program_studi_id', $prodi)
+        //         ->where('mata_kuliahs.semester', $semester)
+        //         ->paginate(10);
+        // }
+        else {
+            $krs = DB::table('kartu_rencana_studis')
+                ->select('kartu_rencana_studis.id as id', 'mahasiswas.npm as npm', 'mahasiswas.name as name', 'mata_kuliahs.kode_matkul as kode_matkul', 'mata_kuliahs.nama_matkul as nama_matkul', 'kartu_rencana_studis.status as status', 'mahasiswas.program_studi_id as prodi', 'mata_kuliahs.semester as semester')
                 ->leftJoin('mahasiswas', 'mahasiswas.id', '=', 'kartu_rencana_studis.mahasiswa_id')
                 ->leftJoin('mata_kuliahs', 'mata_kuliahs.id', '=', 'kartu_rencana_studis.mata_kuliah_id')
                 ->where('mahasiswas.npm', "LIKE", "%$keyword%")
                 ->paginate(10);
         }
-
-        // if ($prodi && $semester) {
-        //     $krs = KartuRencanaStudi::with('mahasiswa')->with('mata_kuliah')
-        //         ->leftJoin('mahasiswas', 'mahasiswas.id', '=', 'kartu_rencana_studis.mahasiswa_id')
-        //         ->leftJoin('mata_kuliahs', 'mata_kuliahs.id', '=', 'kartu_rencana_studis.mata_kuliah_id')
-        //         ->where('mahasiswas.npm', "LIKE", "%$keyword%")
-        //         ->where('status', $status)
-        //         ->where('mahasiswas.program_studi_id', $prodi)
-        //         ->where('mata_kuliahs.semester', $semester)
-        //         ->paginate(10);
-        // }
 
         return view('data_krs.admin.index', compact('krs', 'program_studi'));
     }
@@ -96,16 +120,17 @@ class KartuRencanaStudiController extends Controller
      */
     public function store(Request $request)
     {
+        $user = Auth::user()->mahasiswa->id;
         $services = $request->input('matkul');
-        foreach($services as $service){
+        foreach ($services as $service) {
             KartuRencanaStudi::create([
-                'mahasiswa_id' => 2,
+                'mahasiswa_id' => $user,
                 'mata_kuliah_id' => $service,
                 'status' => 'pengajuan'
             ]);
         }
 
-        return "Berhasil";
+        return redirect()->route('mahasiswa.krs.hasil')->with('success', 'Data Berhasil Disimpan, Status KRS "Pengajuan"');
     }
 
     /**
@@ -137,7 +162,7 @@ class KartuRencanaStudiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
         $krs = KartuRencanaStudi::findOrFail($id);
         if ($krs->status == "PENGAJUAN") {

@@ -47,15 +47,8 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-2">
             <form action="{{ route('mahasiswa.krs') }}">
-                    <select name="prodi" id="prodi" class="form-control">
-                        <option value="">Program Studi</option>
-                        @foreach ($program_studi as $item)
-                            <option {{ Request::get('prodi') == $item->id ? "selected" : "" }} value="{{ $item->id }}">{{ $item->nama_prodi }}</option>
-                        @endforeach
-                    </select>
-                    <br>
                 <select name="semester" id="semester" class="form-control">
                     <option value="">Semester</option>
                     <option {{ Request::get('semester') == "1" ? "selected" : "" }} value="1">1</option>
@@ -67,8 +60,9 @@
                     <option {{ Request::get('semester') == "7" ? "selected" : "" }} value="7">7</option>
                     <option {{ Request::get('semester') == "8" ? "selected" : "" }} value="8">8</option>
                 </select>
-                <br>
-                    <input type="submit" value="Filter" class="btn btn-primary">
+        </div>
+        <div class="col-md-3">
+                <input type="submit" value="Filter" class="btn btn-primary">
             </form>
         </div>
         <form action="{{ route('mahasiswa.krs.store') }}" method="POST">
@@ -81,12 +75,11 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>No</th>
-                    <th>Kode Matkul</th>
-                    <th>Nama Matkul</th>
-                    <th>SKS</th>
+                    <th width="7%">No</th>
+                    <th width="15%">Kode Matkul</th>
+                    <th width="25%">Nama Matkul</th>
+                    <th width="7%">SKS</th>
                     <th width="7%">Semester</th>
-                    <th>Program Studi</th>
                     <th width="10%">Pilih</th>
                 </tr>
             </thead>
@@ -98,7 +91,6 @@
                         <td>{{ $hasil->nama_matkul }}</td>
                         <td>{{ $hasil->sks }}</td>
                         <td>{{ $hasil->semester }}</td>
-                        <td>{{ $hasil->program_studi->nama_prodi }}</td>
                         <td>
                             <input type="checkbox" name="matkul[]" value="{{ $hasil->id }}">
                         </td>

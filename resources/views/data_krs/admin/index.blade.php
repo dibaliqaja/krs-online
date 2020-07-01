@@ -90,10 +90,10 @@
                 @forelse ($krs as $result => $hasil)
                     <tr>
                         <td>{{ $result + $krs->firstitem() }}</td>
-                        <td>{{ $hasil->mahasiswa->npm }}</td>
-                        <td>{{ $hasil->mahasiswa->name }}</td>
-                        <td>{{ $hasil->mata_kuliah->kode_matkul }}</td>
-                        <td>{{ $hasil->mata_kuliah->nama_matkul }}</td>
+                        <td>{{ $hasil->npm }}</td>
+                        <td>{{ $hasil->name }}</td>
+                        <td>{{ $hasil->kode_matkul }}</td>
+                        <td>{{ $hasil->nama_matkul }}</td>
                         <td>
                             @if ($hasil->status == "PENGAJUAN")
                                 <span class="badge badge-warning">{{ $hasil->status }}</span>

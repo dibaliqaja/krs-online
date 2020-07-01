@@ -14,18 +14,11 @@
             margin: 0;
             padding: 0;
             font-family: sans-serif;
-            background: linear-gradient(to right, #6777ef, #79e7fa);
+            background: linear-gradient(to left, #6777ef, #79e7fa);
         }
         h1 {
             text-align: center;
             font-weight: bold;
-        }
-        img.logo {
-            width: 40%;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            padding-top: 0px;
         }
         .tulisan_login {
             text-align: center;
@@ -36,7 +29,7 @@
             width: 350px;
             background: white;
             border-radius: 9px;
-            margin: 50px auto;
+            margin: 120px auto;
             padding: 30px 20px;
             border: 1px solid #e2e2e2;
         }
@@ -76,17 +69,18 @@
 <body>
     <div class="kotak_login">
         @if(session('sukses'))
-        <div class="alert alert-danger" role="alert">
-            {{session('sukses')}}
-        </div>
+            <div class="alert alert-danger" role="alert">
+                {{ session('sukses') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
         @endif
-        <br>
         <h2 class="font-weight-bold text-center">Sistem</h2>
         <h3 class="font-weight-bold text-center">Kartu Rencana Studi</h3>
-
         <form action="postlogin" method="POST">
             @csrf
-            <input type="text" name="npm" class="form_login" placeholder="NPM" required>
+            <input type="text" name="username" class="form_login" placeholder="Username" required>
             <input id="password" type="password" name="password" class="form_login" placeholder="Password" required>
             <button type="submit" class="tombol_login">LOGIN</button>
         </form>

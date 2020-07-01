@@ -14,7 +14,7 @@ class AuthController extends Controller
 
     public function postlogin(Request $request)
     {
-        $cre = $request->only('npm','password');
+        $cre = $request->only('username','password');
         if (Auth::attempt($cre)) {
             if (auth()->user()->role == 'admin') {
                 return redirect('/dashboard');
@@ -22,7 +22,7 @@ class AuthController extends Controller
                 return redirect()->route('mahasiswa.krs');
             }
         }
-        return redirect()->back()->with('sukses','NPM atau Password Salah!');
+        return redirect()->back()->with('sukses','Username atau Password Salah!');
     }
 
     public function logout()
