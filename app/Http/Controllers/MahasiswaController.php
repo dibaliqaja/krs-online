@@ -194,6 +194,7 @@ class MahasiswaController extends Controller
             ];
 
             $user_data = [
+                'username' => $request->npm,
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
@@ -214,6 +215,7 @@ class MahasiswaController extends Controller
             ];
 
             $user_data = [
+                'username' => $request->npm,
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),

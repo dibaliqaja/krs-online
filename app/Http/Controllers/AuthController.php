@@ -9,6 +9,14 @@ class AuthController extends Controller
 {
     public function login()
     {
+        if (auth()->user()) {
+            if (auth()->user()->role == 'admin') {
+                return redirect('/dashboard');
+            } else if (auth()->user()->role == 'mahasiswa') {
+                return redirect('/dashboard-mahasiswa');
+            }
+        }
+
         return view('auth.login');
     }
 
@@ -19,7 +27,7 @@ class AuthController extends Controller
             if (auth()->user()->role == 'admin') {
                 return redirect('/dashboard');
             } else if (auth()->user()->role == 'mahasiswa') {
-                return redirect()->route('mahasiswa.krs');
+                return redirect('/dashboard-mahasiswa');
             }
         }
         return redirect()->back()->with('sukses','Username atau Password Salah!');

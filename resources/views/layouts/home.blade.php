@@ -46,13 +46,31 @@
                     @if (Auth::user())
                     <li class="dropdown"><a href="#" data-toggle="dropdown"
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
+                            @if (auth()->user()->role == 'mahasiswa')
+                                @if (Auth::user()->mahasiswa->avatar === null)
+                                    <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
+                                @else
+                                    <img alt="image" src="{{ asset(Auth::user()->mahasiswa->avatar) }}" class="rounded-circle mr-1">
+                                @endif
+                            @elseif (auth()->user()->role == 'admin')
+                                @if (Auth::user()->avatar === null)
+                                    <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
+                                @else
+                                    <img alt="image" src="{{ asset(Auth::user()->avatar) }}" class="rounded-circle mr-1">
+                                @endif
+                            @endif
                             <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="features-profile.html" class="dropdown-item has-icon">
-                                <i class="far fa-user"></i> Profile
-                            </a>
+                            @if (auth()->user()->role == 'mahasiswa')
+                                <a href="{{ route('profile.mahasiswa.edit') }}" class="dropdown-item has-icon">
+                                    <i class="far fa-user"></i> Profile
+                                </a>
+                            @elseif (auth()->user()->role == 'admin')
+                                <a href="{{ route('profile.admin.edit') }}" class="dropdown-item has-icon">
+                                    <i class="far fa-user"></i> Profile
+                                </a>
+                            @endif
                             <div class="dropdown-divider"></div>
 
                             <a class="dropdown-item" href="/logout">
@@ -62,7 +80,6 @@
                     </li>
                     @else
                         <li class="nav-item"><a href="{{ url('login') }}" class="nav-link">Login</a></li>
-                        {{-- <li class="nav-item"><a href="{{ url('register') }}" class="nav-link">Register</a></li> --}}
                     @endif
                 </ul>
             </nav>

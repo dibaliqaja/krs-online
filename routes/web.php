@@ -21,13 +21,12 @@ Route::get('/logout','AuthController@logout')->name('logout');
 
 Route::group(['middleware' => ['auth', 'CheckRole:mahasiswa']], function () {
 
-    Route::get('/', function () {
-        return view('dashboard');
+    Route::get('/dashboard-mahasiswa', function () {
+        return view('profile.dashboard');
     });
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
+    Route::get('profile/mahasiswa', 'ProfileMahasiswaController@edit')->name('profile.mahasiswa.edit');
+    Route::patch('profile/mahasiswa', 'ProfileMahasiswaController@update')->name('profile.mahasiswa.update');
 
     Route::get('kartu-rencana-studi/mahasiswa', 'KartuRencanaStudiController@indexMahasiswa')->name('mahasiswa.krs');
     Route::post('kartu-rencana-studi/mahasiswa', 'KartuRencanaStudiController@store')->name('mahasiswa.krs.store');
@@ -38,13 +37,12 @@ Route::group(['middleware' => ['auth', 'CheckRole:mahasiswa']], function () {
 
 Route::group(['middleware' => ['auth', 'CheckRole:admin']], function () {
 
-    Route::get('/', function () {
-        return view('dashboard');
-    });
-
     Route::get('/dashboard', function () {
         return view('dashboard');
     });
+
+    Route::get('profile/admin', 'ProfileAdminController@edit')->name('profile.admin.edit');
+    Route::patch('profile/admin', 'ProfileAdminController@update')->name('profile.admin.update');
 
     Route::resource('angkatan', 'AngkatanController');
     Route::resource('semester', 'SemesterController');
