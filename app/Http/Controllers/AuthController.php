@@ -11,7 +11,7 @@ class AuthController extends Controller
     {
         if (auth()->user()) {
             if (auth()->user()->role == 'admin') {
-                return redirect('/dashboard');
+                return redirect('/dashboard-admin');
             } else if (auth()->user()->role == 'mahasiswa') {
                 return redirect('/dashboard-mahasiswa');
             }
@@ -25,12 +25,12 @@ class AuthController extends Controller
         $cre = $request->only('username','password');
         if (Auth::attempt($cre)) {
             if (auth()->user()->role == 'admin') {
-                return redirect('/dashboard');
+                return redirect('/dashboard-admin');
             } else if (auth()->user()->role == 'mahasiswa') {
                 return redirect('/dashboard-mahasiswa');
             }
         }
-        return redirect()->back()->with('sukses','Username atau Password Salah!');
+        return redirect()->back()->with('alert','Username atau Password Salah!');
     }
 
     public function logout()

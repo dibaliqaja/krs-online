@@ -23,38 +23,24 @@
     @endif
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3 mb-2">
             <form action="{{ route('admin.krs') }}">
                 <div class="input-group">
-                    <input type="text" name="keyword" class="form-control" placeholder="NPM Search" value="{{ Request::get('keyword') }}">
+                    <input type="text" name="keyword" class="form-control" placeholder="Cari berdasarkan NPM" value="{{ Request::get('keyword') }}">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                     </div>
                 </div>
-            </form>
         </div>
-        <div class="col-md-3">
-            <ul class="nav nav-pills card-header-pills">
-                <li class="nav-item">
-                    <a href="{{ route('admin.krs') }}" class="nav-link {{ Request::get('status') == NULL && Request::path() == 'kartu-rencana-studi/admin' ? 'active' : '' }}">All</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.krs', ['status' => 'PENGAJUAN']) }}" class="nav-link {{ Request::get('status') == 'PENGAJUAN' ? 'active' : '' }}">Pengajuan</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.krs', ['status' => 'DITERIMA']) }}" class="nav-link {{ Request::get('status') == 'DITERIMA' ? 'active' : '' }}">Diterima</a>
-                </li>
-            </ul>
-        </div><br><br><br>
-        <div class="col-md-7">
-            <form action="{{ route('admin.krs') }}">
-                    <select name="prodi" id="prodi" class="form-control">
-                        <option value="">Program Studi</option>
-                        @foreach ($program_studi as $item)
-                            <option {{ Request::get('prodi') == $item->id ? "selected" : "" }} value="{{ $item->id }}">{{ $item->nama_prodi }}</option>
-                        @endforeach
-                    </select>
-                    <br>
+        <div class="col-md-3 mb-2">
+                <select name="prodi" id="prodi" class="form-control">
+                    <option value="">Program Studi</option>
+                    @foreach ($program_studi as $item)
+                        <option {{ Request::get('prodi') == $item->id ? "selected" : "" }} value="{{ $item->id }}">{{ $item->nama_prodi }}</option>
+                    @endforeach
+                </select>
+        </div>
+        <div class="col md-2 mb-2">
                 <select name="semester" id="semester" class="form-control">
                     <option value="">Semester</option>
                     <option {{ Request::get('semester') == "1" ? "selected" : "" }} value="1">1</option>
@@ -66,9 +52,25 @@
                     <option {{ Request::get('semester') == "7" ? "selected" : "" }} value="7">7</option>
                     <option {{ Request::get('semester') == "8" ? "selected" : "" }} value="8">8</option>
                 </select>
-                <br>
+        </div>
+        <div class="col md-2">
+                <select name="status" id="status" class="form-control">
+                    <option value="">Status</option>
+                    <option {{ Request::get('status') == "PENGAJUAN" ? "selected" : "" }} value="PENGAJUAN">Pengajuan</option>
+                    <option {{ Request::get('status') == "DITERIMA" ? "selected" : "" }} value="DITERIMA">Diterima</option>
+                </select>
+        </div>
+        <div class="col-md-1">
+                <div class="mt-1">
                     <input type="submit" value="Filter" class="btn btn-primary">
+                </div>
             </form>
+        </div>
+        </form>
+        <div class="col-md-1">
+            <div class="mt-1">
+                <a href="{{ route('admin.krs') }}" class="btn btn-info">Reset</a>
+            </div>
         </div>
     </div>
     <br>

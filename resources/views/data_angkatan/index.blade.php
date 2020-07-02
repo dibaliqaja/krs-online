@@ -22,14 +22,14 @@
     </div>
     @endif
 
-    <div>
-        <a href="{{ route('angkatan.create') }}" class="btn btn-primary">Tambah Data</a><br><br>
-    </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-8">
+            <a href="{{ route('angkatan.create') }}" class="btn btn-primary">Tambah Data</a><br><br>
+        </div>
+        <div class="col-md-4">
             <form action="{{ route('angkatan.index') }}" class="flex-sm">
                 <div class="input-group">
-                    <input type="text" name="keyword" class="form-control" placeholder="Search" value="{{ Request::get('keyword') }}">
+                    <input type="text" name="keyword" class="form-control" placeholder="Cari berdasarkan Angkatan" value="{{ Request::get('keyword') }}">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                     </div>

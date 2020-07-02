@@ -40,7 +40,7 @@
         <div class="col-md-5">
             <form action="{{ route('mahasiswa.krs') }}">
                 <div class="input-group">
-                    <input type="text" name="keyword" class="form-control" placeholder="Search" value="{{ Request::get('keyword') }}">
+                    <input type="text" name="keyword" class="form-control" placeholder="Cari Mata Kuliah" value="{{ Request::get('keyword') }}">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                     </div>

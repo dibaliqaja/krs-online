@@ -54,6 +54,7 @@
                     <th width="5%">No</th>
                     <th>Kode Matkul</th>
                     <th>Nama Matkul</th>
+                    <th>Semester</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -63,6 +64,7 @@
                         <td>{{ $result + $krs->firstitem() }}</td>
                         <td>{{ $hasil->mata_kuliah->kode_matkul }}</td>
                         <td>{{ $hasil->mata_kuliah->nama_matkul }}</td>
+                        <td>{{ $hasil->mata_kuliah->semester }}</td>
                         <td>
                             @if ($hasil->status == "PENGAJUAN")
                                 <span class="badge badge-warning">{{ $hasil->status }}</span>

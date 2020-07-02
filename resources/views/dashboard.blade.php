@@ -8,8 +8,13 @@
             <div class="col-12 mb-4">
                 <div class="hero bg-primary text-white">
                     <div class="hero-inner">
-                        <h2>Welcome Back, {{ Auth::user()->name }}</h2>
-                        <p class="lead">This website is a for managing Campus Academic Information Systems.</p>
+                        <h2>Selamat Datang, {{ Auth::user()->name }}</h2>
+                        <p>
+                            Di Sistem Kartu Rencana Studi Online.
+                            Sistem ini terus dikembangkan sesuai dengan informasi yang terupdate,
+                            oleh karena itu saran dan kritikan sangat diperlukan untuk perbaikan.
+                            Semoga dengan kehadiran sistem ini menjadikan akuntabel dalam pengelolaan kartu rencana studi mahasiswa.
+                        </p>
                     </div>
                 </div>
             </div>

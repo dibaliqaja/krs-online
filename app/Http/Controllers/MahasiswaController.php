@@ -19,13 +19,29 @@ class MahasiswaController extends Controller
      */
     public function index(Request $request)
     {
-        $mahasiswa = Mahasiswa::latest()->paginate(10);
-        $filterKeyword  = $request->get('keyword');
-        if ($filterKeyword) {
-            $mahasiswa = Mahasiswa::where('nama', 'LIKE', "%$filterKeyword%")->paginate(10);
+        $program_studi = ProgramStudi::all();
+        $semester = Semester::all();
+        $angkatan = Angkatan::all();
+
+        $prodi = $request->get('prodi');
+        $semester_m = $request->get('semester');
+        $angkatan_m = $request->get('angkatan');
+        $filterKeyword  = $request->get('keyword') ? $request->get('keyword') : '';
+
+        if ($filterKeyword && $prodi || $semester_m || $angkatan_m) {
+            $mahasiswa = Mahasiswa::latest()
+                ->where('name', 'LIKE', "%$filterKeyword%")
+                ->where('program_studi_id', $prodi)
+                ->where('semester_id', $semester_m)
+                ->where('angkatan_id', $angkatan_m)
+                ->paginate(10);
+        } else {
+            $mahasiswa = Mahasiswa::latest()
+                ->where('name', 'LIKE', "%$filterKeyword%")
+                ->paginate(10);
         }
 
-        return view('data_mahasiswa.index', compact('mahasiswa'));
+        return view('data_mahasiswa.index', compact('mahasiswa', 'program_studi', 'semester', 'angkatan'));
     }
 
     /**

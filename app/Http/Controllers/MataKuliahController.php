@@ -16,13 +16,22 @@ class MataKuliahController extends Controller
      */
     public function index(Request $request)
     {
-        $matkul = MataKuliah::latest()->paginate(10);
-        $filterKeyword  = $request->get('keyword');
-        if ($filterKeyword) {
+        $program_studi = ProgramStudi::all();
+        $prodi = $request->get('prodi');
+        $semester = $request->get('semester');
+        $filterKeyword  = $request->get('keyword') ? $request->get('keyword') : '';
+
+        if ($filterKeyword && $prodi || $semester) {
+            $matkul = MataKuliah::with('program_studi')
+                    ->where('program_studi_id', $prodi)
+                    ->where('semester', $semester)
+                    ->where('nama_matkul', 'LIKE', "%$filterKeyword%")
+                    ->paginate(10);
+        } else {
             $matkul = MataKuliah::where('nama_matkul', 'LIKE', "%$filterKeyword%")->paginate(10);
         }
 
-        return view('data_matkul.index', compact('matkul'));
+        return view('data_matkul.index', compact('matkul', 'program_studi'));
     }
 
     /**

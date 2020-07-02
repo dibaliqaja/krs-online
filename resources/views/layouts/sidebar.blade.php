@@ -9,7 +9,7 @@
         <ul class="sidebar-menu">
             @if (auth()->user()->role == 'admin')
                 <li>
-                    <a class="nav-link" href="{{ url('/dashboard') }}"><i class="fas fa-fire"></i>
+                    <a class="nav-link" href="{{ url('/dashboard-admin') }}"><i class="fas fa-fire"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
@@ -35,7 +35,7 @@
                 <li class="dropdown">
                     <a class="nav-link has-dropdown"><i class="fas fa-id-card"></i><span>Kartu Rencana Studi</span></a>
                     <ul class="dropdown-menu">
-                        <li><a class="nav-link" href="{{ route('admin.krs') }}">ACC KRS</a></li>
+                        <li><a class="nav-link" href="{{ route('admin.krs') }}">Data KRS Mahasiswa</a></li>
                     </ul>
                 </li>
             @endif

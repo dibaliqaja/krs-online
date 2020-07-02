@@ -26,15 +26,49 @@
         <a href="{{ route('mahasiswa.create') }}" class="btn btn-primary">Tambah Data</a><br><br>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3 mb-2">
             <form action="{{ route('mahasiswa.index') }}" class="flex-sm">
                 <div class="input-group">
-                    <input type="text" name="keyword" class="form-control" placeholder="Search" value="{{ Request::get('keyword') }}">
+                    <input type="text" name="keyword" class="form-control" placeholder="Cari berdasarkan Nama" value="{{ Request::get('keyword') }}">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
                     </div>
                 </div>
+        </div>
+        <div class="col-md-3 mb-2">
+                <select name="prodi" id="prodi" class="form-control">
+                    <option value="">Program Studi</option>
+                    @foreach ($program_studi as $item)
+                        <option {{ Request::get('prodi') == $item->id ? "selected" : "" }} value="{{ $item->id }}">{{ $item->nama_prodi }}</option>
+                    @endforeach
+                </select>
+        </div>
+        <div class="col-md-2 mb-2">
+                <select name="semester" id="semester" class="form-control">
+                    <option value="">Semester</option>
+                    @foreach ($semester as $item)
+                        <option {{ Request::get('semester') == $item->id ? "selected" : "" }} value="{{ $item->id }}">{{ $item->semester }}</option>
+                    @endforeach
+                </select>
+        </div>
+        <div class="col-md-2 mb-2">
+                <select name="angkatan" id="angkatan" class="form-control">
+                    <option value="">Angkatan</option>
+                    @foreach ($angkatan as $item)
+                        <option {{ Request::get('angkatan') == $item->id ? "selected" : "" }} value="{{ $item->id }}">{{ $item->angkatan }}</option>
+                    @endforeach
+                </select>
+        </div>
+        <div class="col-md-1">
+                <div class="mt-1">
+                    <input type="submit" value="Filter" class="btn btn-primary">
+                </div>
             </form>
+        </div>
+        <div class="col-md-1">
+            <div class="mt-1">
+                <a href="{{ route('mahasiswa.index') }}" class="btn btn-info">Reset</a>
+            </div>
         </div>
     </div>
     <br>

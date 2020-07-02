@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Manajemen Administrasi Sekolah</title>
+    <title>Sistem Kartu Rencana Studi</title>
     <style>
         body {
             margin: 0;
@@ -68,9 +68,9 @@
 
 <body>
     <div class="kotak_login">
-        @if(session('sukses'))
+        @if (session('alert'))
             <div class="alert alert-danger" role="alert">
-                {{ session('sukses') }}
+                {{ session('alert') }}
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

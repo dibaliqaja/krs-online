@@ -21,21 +21,20 @@ class KartuRencanaStudiController extends Controller
     {
         $prodi = Auth::user()->mahasiswa->program_studi_id;
         $semester = $request->get('semester');
-        $matkul = MataKuliah::with('program_studi')->where('program_studi_id', $prodi)->paginate(10);
-        $filterKeyword  = $request->get('keyword');
-        if ($filterKeyword) {
-            $matkul = MataKuliah::with('program_studi')
-                    ->where('program_studi_id', $prodi)
-                    ->where('nama_matkul', 'LIKE', "%$filterKeyword%")
-                    ->paginate(10);
-        }
+        $filterKeyword  = $request->get('keyword') ? $request->get('keyword') : '';
 
-        // if ($prodi && $semester) {
-        //     $matkul = MataKuliah::with('program_studi')
-        //             ->where('program_studi_id', $prodi)
-        //             ->where('semester', $semester)
-        //             ->paginate(10);
-        // }
+        $matkul = MataKuliah::with('program_studi')
+                ->where('program_studi_id', $prodi)
+                ->where('nama_matkul', 'LIKE', "%$filterKeyword%")
+                ->paginate(10);
+
+        if ($semester) {
+            $matkul = MataKuliah::with('program_studi')
+                ->where('program_studi_id', $prodi)
+                ->where('nama_matkul', 'LIKE', "%$filterKeyword%")
+                ->where('semester', $semester)
+                ->paginate(10);
+        }
 
         return view('data_krs.index', compact('matkul'));
     }
@@ -71,26 +70,17 @@ class KartuRencanaStudiController extends Controller
         $semester = $request->get('semester');
         $keyword = $request->get('keyword') ? $request->get('keyword') : '';
 
-        if ($status) {
+        if ($keyword && $prodi || $semester || $status) {
             $krs = DB::table('kartu_rencana_studis')
                 ->select('kartu_rencana_studis.id as id', 'mahasiswas.npm as npm', 'mahasiswas.name as name', 'mata_kuliahs.kode_matkul as kode_matkul', 'mata_kuliahs.nama_matkul as nama_matkul', 'kartu_rencana_studis.status as status', 'mahasiswas.program_studi_id as prodi', 'mata_kuliahs.semester as semester')
                 ->leftJoin('mahasiswas', 'mahasiswas.id', '=', 'kartu_rencana_studis.mahasiswa_id')
                 ->leftJoin('mata_kuliahs', 'mata_kuliahs.id', '=', 'kartu_rencana_studis.mata_kuliah_id')
                 ->where('mahasiswas.npm', "LIKE", "%$keyword%")
+                ->where('mahasiswas.program_studi_id', $prodi)
+                ->where('mata_kuliahs.semester', $semester)
                 ->where('status', $status)
                 ->paginate(10);
-        }
-        // else if ($status && $prodi && $semester) {
-        //     $krs = DB::table('kartu_rencana_studis')
-        //         ->select('kartu_rencana_studis.id as id', 'mahasiswas.npm as npm', 'mahasiswas.name as name', 'mata_kuliahs.kode_matkul as kode_matkul', 'mata_kuliahs.nama_matkul as nama_matkul', 'kartu_rencana_studis.status as status', 'mahasiswas.program_studi_id as prodi', 'mata_kuliahs.semester as semester')
-        //         ->leftJoin('mahasiswas', 'mahasiswas.id', '=', 'kartu_rencana_studis.mahasiswa_id')
-        //         ->leftJoin('mata_kuliahs', 'mata_kuliahs.id', '=', 'kartu_rencana_studis.mata_kuliah_id')
-        //         ->where('mahasiswas.npm', "LIKE", "%$keyword%")
-        //         ->where('mahasiswas.program_studi_id', $prodi)
-        //         ->where('mata_kuliahs.semester', $semester)
-        //         ->paginate(10);
-        // }
-        else {
+        } else {
             $krs = DB::table('kartu_rencana_studis')
                 ->select('kartu_rencana_studis.id as id', 'mahasiswas.npm as npm', 'mahasiswas.name as name', 'mata_kuliahs.kode_matkul as kode_matkul', 'mata_kuliahs.nama_matkul as nama_matkul', 'kartu_rencana_studis.status as status', 'mahasiswas.program_studi_id as prodi', 'mata_kuliahs.semester as semester')
                 ->leftJoin('mahasiswas', 'mahasiswas.id', '=', 'kartu_rencana_studis.mahasiswa_id')
