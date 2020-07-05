@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dosen;
+use App\ProgramStudi;
 use Illuminate\Http\Request;
 
 class DosenController extends Controller
@@ -29,7 +30,8 @@ class DosenController extends Controller
      */
     public function create()
     {
-        return view('data_dosen.create');
+        $prodi = ProgramStudi::all();
+        return view('data_dosen.create', compact('prodi'));
     }
 
     /**
@@ -49,6 +51,7 @@ class DosenController extends Controller
             'alamat' => 'required|min:5',
             'no_hp' => 'required',
             'email' => 'required|email|unique:dosens,email',
+            'program_studi_id' => 'required',
             'avatar' => 'image|max:1024'
         ]);
 
@@ -66,10 +69,8 @@ class DosenController extends Controller
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
                 'email' => $request->email,
-                'program_studi_id' => $request->program_studis_id,
-                'semester_id' => $request->semesters_id,
-                'angkatan_id' => $request->angkatans_id,
-                'avatar'      => 'public/uploads/dosen/'.$new_avatar,
+                'program_studi_id' => $request->program_studi_id,
+                'avatar'      => 'public/uploads/dosen/'.$new_avatar
             ]);
 
             $avatar->move('public/uploads/dosen/', $new_avatar);
@@ -83,7 +84,8 @@ class DosenController extends Controller
                 'agama' => $request->agama,
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
-                'email' => $request->email
+                'email' => $request->email,
+                'program_studi_id' => $request->program_studi_id
             ]);
         }
 
@@ -110,8 +112,9 @@ class DosenController extends Controller
      */
     public function edit($id)
     {
-        $dosen = Dosen::findOrFail($id);
-        return view('data_dosen.edit', compact('dosen'));
+        $prodi = ProgramStudi::all();
+        $dosen = Dosen::with('program_studi')->findOrFail($id);
+        return view('data_dosen.edit', compact('dosen', 'prodi'));
     }
 
     /**
@@ -132,6 +135,7 @@ class DosenController extends Controller
             'alamat' => 'required|min:5',
             'no_hp' => 'required',
             'email' => 'required|email|unique:dosens,email,' . $id,
+            'program_studi_id' => 'required',
             'avatar' => 'image|max:1024'
         ]);
 
@@ -152,6 +156,7 @@ class DosenController extends Controller
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
                 'email' => $request->email,
+                'program_studi_id' => $request->program_studi_id,
                 'avatar'      => 'public/uploads/dosen/'.$new_avatar,
             ];
         } else {
@@ -165,6 +170,7 @@ class DosenController extends Controller
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
                 'email' => $request->email,
+                'program_studi_id' => $request->program_studi_id
             ];
         }
 

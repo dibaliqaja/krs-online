@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('title_page','Tambah Semester')
+@section('title_page','Tambah Tahun Ajaran')
 @section('content')
 
     @if ($errors->any())
@@ -13,15 +13,15 @@
         </div>
     @endif
 
-    <form action="{{ route('semester.store') }}" method="post">
+    <form action="{{ route('tahun-ajaran.store') }}" method="post">
         @csrf
         <div class="form-group">
-            <label for="">Semester</label>
-            <input type="text" class="form-control" name="semester" placeholder="Semester Genap 0000/0000" value="{{ old('semester') }}">
+            <label for="">Tahun Ajaran</label>
+            <input type="text" class="form-control" name="tahun_ajaran" value="{{ old('tahun_ajaran') }}">
         </div>
         <div class="form-group">
             <button class="btn btn-primary">Tambah</button>
-            <a href="{{ route('semester.index') }}" class="btn btn-danger">Kembali</a>
+            <a href="{{ route('tahun-ajaran.index') }}" class="btn btn-danger">Kembali</a>
         </div>
     </form>
 

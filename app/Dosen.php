@@ -24,16 +24,18 @@ class Dosen extends Model
         'email',
         'password',
         'avatar',
+        'program_studi_id'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password',
-    ];
+    public function program_studi()
+    {
+        return $this->belongsTo(ProgramStudi::class);
+    }
+
+    public function angkatan()
+    {
+        return $this->hasMany(Dosen::class);
+    }
 
     public function mata_kuliah()
     {

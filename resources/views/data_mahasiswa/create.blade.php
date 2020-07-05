@@ -17,11 +17,11 @@
         @csrf
         <div class="form-group">
             <label for="">NPM</label>
-            <input type="text" class="form-control" name="npm" placeholder="0000000000" value="{{ old('npm') }}">
+            <input type="text" class="form-control" name="npm" value="{{ old('npm') }}">
         </div>
         <div class="form-group">
             <label for="">Nama</label>
-            <input type="text" class="form-control" name="name" placeholder="Adi Gumilang" value="{{ old('name') }}">
+            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
         </div>
         <div class="form-group">
             <label>Jenis Kelamin</label>
@@ -32,7 +32,7 @@
         </div>
         <div class="form-group">
             <label for="">Tempat Lahir</label>
-            <input type="text" class="form-control" name="tempat_lahir" placeholder="Tuban" value="{{ old('tempat_lahir') }}">
+            <input type="text" class="form-control" name="tempat_lahir" value="{{ old('tempat_lahir') }}">
         </div>
         <div class="form-group">
             <label for="">Tanggal Lahir</label>
@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
             <label for="">Agama</label>
-            <input type="text" class="form-control" name="agama" placeholder="Islam" value="{{ old('agama') }}">
+            <input type="text" class="form-control" name="agama" value="{{ old('agama') }}">
         </div>
         <div class="form-group">
             <label for="">Alamat</label>
@@ -48,41 +48,25 @@
         </div>
         <div class="form-group">
             <label for="">No. Handphone</label>
-            <input type="text" class="form-control" name="no_hp" placeholder="089000000000" value="{{ old('no_hp') }}">
+            <input type="text" class="form-control" name="no_hp" value="{{ old('no_hp') }}">
         </div>
         <div class="form-group">
             <label for="">Email</label>
-            <input type="email" class="form-control" name="email" placeholder="089000000000" value="{{ old('email') }}">
+            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
         </div>
         <div class="form-group">
             <label for="">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="********" value="{{ old('password') }}">
+            <input type="password" class="form-control" name="password" value="{{ old('password') }}">
         </div>
         <div class="form-group">
             <label for="">Password Confirmation</label>
-            <input type="password" class="form-control" name="password_confirmation" placeholder="********" value="{{ old('password_confirmation') }}">
-        </div>
-        <div class="form-group">
-            <label for="">Program Studi</label>
-            <select class="form-control select2" name="program_studis_id">
-                @foreach ($prodi as $result)
-                    <option value="{{ $result->id }}">{{ $result->nama_prodi }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="">Semester</label>
-            <select class="form-control select2" name="semesters_id">
-                @foreach ($semester as $result)
-                    <option value="{{ $result->id }}">{{ $result->semester }}</option>
-                @endforeach
-            </select>
+            <input type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}">
         </div>
         <div class="form-group">
             <label for="">Angkatan</label>
-            <select class="form-control select2" name="angkatans_id">
+            <select class="form-control select2" name="angkatan_id">
                 @foreach ($angkatan as $result)
-                    <option value="{{ $result->id }}">{{ $result->angkatan }}</option>
+                    <option value="{{ $result->id }}">{{ $result->angkatan }} - {{ $result->program_studi->nama_prodi }}</option>
                 @endforeach
             </select>
         </div>

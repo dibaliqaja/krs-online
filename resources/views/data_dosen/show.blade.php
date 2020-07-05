@@ -58,6 +58,10 @@
             <label for="">Email</label>
             <input type="email" class="form-control" name="email" value="{{ $dosen->email }}" readonly>
         </div>
+        <div class="form-group">
+            <label for="">Program Studi</label>
+            <input type="text" class="form-control" name="program_studi_id" value="{{ $dosen->program_studi->nama_prodi }}" readonly>
+        </div>
     </form>
 
 @endsection

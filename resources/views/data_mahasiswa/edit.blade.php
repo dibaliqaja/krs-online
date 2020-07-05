@@ -18,11 +18,11 @@
         @method('patch')
         <div class="form-group">
             <label for="">NPM</label>
-            <input type="text" class="form-control" name="npm" placeholder="0000000000" value="{{ $mahasiswa->npm }}">
+            <input type="text" class="form-control" name="npm" value="{{ $mahasiswa->npm }}">
         </div>
         <div class="form-group">
             <label for="">Nama</label>
-            <input type="text" class="form-control" name="name" placeholder="Adi Gumilang" value="{{ $mahasiswa->user->name }}">
+            <input type="text" class="form-control" name="name" value="{{ $mahasiswa->user->name }}">
         </div>
         <div class="form-group">
             <label>Jenis Kelamin</label>
@@ -33,7 +33,7 @@
         </div>
         <div class="form-group">
             <label for="">Tempat Lahir</label>
-            <input type="text" class="form-control" name="tempat_lahir" placeholder="Tuban" value="{{ $mahasiswa->tempat_lahir }}">
+            <input type="text" class="form-control" name="tempat_lahir" value="{{ $mahasiswa->tempat_lahir }}">
         </div>
         <div class="form-group">
             <label for="">Tanggal Lahir</label>
@@ -41,7 +41,7 @@
         </div>
         <div class="form-group">
             <label for="">Agama</label>
-            <input type="text" class="form-control" name="agama" placeholder="Islam" value="{{ $mahasiswa->agama }}">
+            <input type="text" class="form-control" name="agama" value="{{ $mahasiswa->agama }}">
         </div>
         <div class="form-group">
             <label for="">Alamat</label>
@@ -49,41 +49,25 @@
         </div>
         <div class="form-group">
             <label for="">No. Handphone</label>
-            <input type="text" class="form-control" name="no_hp" placeholder="089000000000" value="{{ $mahasiswa->no_hp }}">
+            <input type="text" class="form-control" name="no_hp" value="{{ $mahasiswa->no_hp }}">
         </div>
         <div class="form-group">
             <label for="">Email</label>
-            <input type="email" class="form-control" name="email" placeholder="089000000000" value="{{ $mahasiswa->user->email }}">
+            <input type="email" class="form-control" name="email" value="{{ $mahasiswa->user->email }}">
         </div>
         <div class="form-group">
             <label for="">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="********">
+            <input type="password" class="form-control" name="password">
         </div>
         <div class="form-group">
             <label for="">Password Confirmation</label>
-            <input type="password" class="form-control" name="password_confirmation" placeholder="********">
-        </div>
-        <div class="form-group">
-            <label for="">Program Studi</label>
-            <select class="form-control select2" name="program_studis_id">
-                @foreach ($prodi as $result)
-                    <option value="{{ $result->id }}" {{ $result->id == $mahasiswa->program_studis_id ? 'selected' : '' }}>{{ $result->nama_prodi }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="">Semester</label>
-            <select class="form-control select2" name="semesters_id">
-                @foreach ($semester as $result)
-                    <option value="{{ $result->id }}" {{ $result->id == $mahasiswa->semesters_id ? 'selected' : '' }}>{{ $result->semester }}</option>
-                @endforeach
-            </select>
+            <input type="password" class="form-control" name="password_confirmation">
         </div>
         <div class="form-group">
             <label for="">Angkatan</label>
-            <select class="form-control select2" name="angkatans_id">
+            <select class="form-control select2" name="angkatan_id">
                 @foreach ($angkatan as $result)
-                    <option value="{{ $result->id }}" {{ $result->id == $mahasiswa->angkatans_id ? 'selected' : '' }}>{{ $result->angkatan }}</option>
+                    <option value="{{ $result->id }}" {{ $result->id == $mahasiswa->angkatan_id ? 'selected' : '' }}>{{ $result->angkatan }} - {{ $result->program_studi->nama_prodi }}</option>
                 @endforeach
             </select>
         </div>

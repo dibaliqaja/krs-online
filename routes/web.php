@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:mahasiswa']], function () {
     Route::patch('profile/mahasiswa', 'ProfileMahasiswaController@update')->name('profile.mahasiswa.update');
 
     Route::get('kartu-rencana-studi/mahasiswa', 'KartuRencanaStudiController@indexMahasiswa')->name('mahasiswa.krs');
+    // Route::post('kartu-rencana-studi/mahasiswa/pilih', 'KartuRencanaStudiController@create')->name('mahasiswa.krs.create');
     Route::post('kartu-rencana-studi/mahasiswa', 'KartuRencanaStudiController@store')->name('mahasiswa.krs.store');
     Route::get('kartu-rencana-studi/mahasiswa/hasil', 'KartuRencanaStudiController@indexMahasiswaHasil')->name('mahasiswa.krs.hasil');
     Route::post('kartu-rencana-studi/mahasiswa/delete', 'KartuRencanaStudiController@delete')->name('mahasiswa.krs.delete');
@@ -51,7 +52,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin']], function () {
     Route::patch('profile/admin', 'ProfileAdminController@update')->name('profile.admin.update');
 
     Route::resource('angkatan', 'AngkatanController');
-    Route::resource('semester', 'SemesterController');
+    Route::resource('tahun-ajaran', 'TahunAjaranController');
     Route::resource('program-studi', 'ProgramStudiController');
     Route::resource('mata-kuliah', 'MataKuliahController');
     Route::resource('mahasiswa', 'MahasiswaController');

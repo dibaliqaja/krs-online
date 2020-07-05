@@ -18,11 +18,11 @@
         @method('patch')
         <div class="form-group">
             <label for="">NIDN</label>
-            <input type="text" class="form-control" name="nidn" placeholder="0000000000" value="{{ $dosen->nidn }}">
+            <input type="text" class="form-control" name="nidn" value="{{ old('nidn', $dosen->nidn) }}">
         </div>
         <div class="form-group">
             <label for="">Nama</label>
-            <input type="text" class="form-control" name="nama" placeholder="Adi Gumilang" value="{{ $dosen->nama }}">
+            <input type="text" class="form-control" name="nama" value="{{ old('nama', $dosen->nama) }}">
         </div>
         <div class="form-group">
             <label>Jenis Kelamin</label>
@@ -33,35 +33,35 @@
         </div>
         <div class="form-group">
             <label for="">Tempat Lahir</label>
-            <input type="text" class="form-control" name="tempat_lahir" placeholder="Tuban" value="{{ $dosen->tempat_lahir }}">
+            <input type="text" class="form-control" name="tempat_lahir" value="{{ old('tempat_lahir', $dosen->tempat_lahir) }}">
         </div>
         <div class="form-group">
             <label for="">Tanggal Lahir</label>
-            <input type="date" class="form-control" name="tgl_lahir" value="{{ $dosen->tgl_lahir }}">
+            <input type="date" class="form-control" name="tgl_lahir" value="{{ old('tgl_lahir', $dosen->tgl_lahir) }}">
         </div>
         <div class="form-group">
             <label for="">Agama</label>
-            <input type="text" class="form-control" name="agama" placeholder="Islam" value="{{ $dosen->agama }}">
+            <input type="text" class="form-control" name="agama" value="{{ old('agama', $dosen->agama) }}">
         </div>
         <div class="form-group">
             <label for="">Alamat</label>
-            <textarea name="alamat" class="form-control" cols="30" rows="10">{{ $dosen->alamat }}</textarea>
+            <textarea name="alamat" class="form-control" cols="30" rows="10">{{ old('alamat', $dosen->alamat) }}</textarea>
         </div>
         <div class="form-group">
             <label for="">No. Handphone</label>
-            <input type="text" class="form-control" name="no_hp" placeholder="089000000000" value="{{ $dosen->no_hp }}">
+            <input type="text" class="form-control" name="no_hp" value="{{ old('no_hp', $dosen->no_hp) }}">
         </div>
         <div class="form-group">
             <label for="">Email</label>
-            <input type="email" class="form-control" name="email" placeholder="089000000000" value="{{ $dosen->email }}">
+            <input type="email" class="form-control" name="email" value="{{ old('email', $dosen->email) }}">
         </div>
         <div class="form-group">
-            <label for="">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="********">
-        </div>
-        <div class="form-group">
-            <label for="">Password Confirmation</label>
-            <input type="password" class="form-control" name="password_confirmation" placeholder="********">
+            <label for="">Program Studi</label>
+            <select class="form-control select2" name="program_studi_id">
+                @foreach ($prodi as $result)
+                    <option value="{{ $result->id }}" {{ $result->id == $dosen->program_studi_id ? 'selected' : '' }}>{{ $result->nama_prodi }}</option>
+                @endforeach
+            </select>
         </div>
         <div class="form-group">
             <label for="">Profil Image</label>

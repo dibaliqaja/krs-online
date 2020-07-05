@@ -76,21 +76,21 @@
     <br>
 
     <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table table-hover table-bordered">
             <thead>
-                <tr>
-                    <th>No</th>
+                <tr align="middle">
+                    <th width="3%">No</th>
                     <th>NPM</th>
                     <th>Nama Mahasiswa</th>
-                    <th>Kode Matkul</th>
+                    <th width="10%">Kode Matkul</th>
                     <th>Nama Matkul</th>
                     <th>Status</th>
-                    <th width="13%">Action</th>
+                    <th width="5%">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($krs as $result => $hasil)
-                    <tr>
+                    <tr align="middle">
                         <td>{{ $result + $krs->firstitem() }}</td>
                         <td>{{ $hasil->npm }}</td>
                         <td>{{ $hasil->name }}</td>
@@ -110,7 +110,6 @@
                                     <button class="btn btn-sm btn-info" type="submit"><i class="fas fa-check"></i></button>
                                     <a href="" class="btn btn-sm btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusKRSModal"><i class="fas fa-trash"></i></a>
                                 @else
-                                    <button class="btn btn-sm btn-info" type="submit"><i class="fas fa-window-close"></i></button>
                                     <a href="" class="btn btn-sm btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusKRSModal"><i class="fas fa-trash"></i></a>
                                 @endif
                             </form>
@@ -118,7 +117,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td>Tidak ada data.</td>
+                        <td colspan="3">Tidak ada data.</td>
                     </tr>
                 @endforelse
             </tbody>

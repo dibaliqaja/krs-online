@@ -15,8 +15,23 @@ class CreateAngkatansTable extends Migration
     {
         Schema::create('angkatans', function (Blueprint $table) {
             $table->id();
-            $table->string('angkatan')->unique();
+            $table->string('kode_angkatan');
+            $table->string('angkatan');
+            $table->unsignedBigInteger('dosen_id');
+            $table->unsignedBigInteger('program_studi_id');
             $table->timestamps();
+
+            $table->foreign('dosen_id')
+                ->references('id')
+                ->on('dosens')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('program_studi_id')
+                ->references('id')
+                ->on('program_studis')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

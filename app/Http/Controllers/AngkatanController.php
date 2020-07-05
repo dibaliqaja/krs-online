@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Angkatan;
+use App\Dosen;
+use App\ProgramStudi;
 use Illuminate\Http\Request;
 
 class AngkatanController extends Controller
@@ -29,7 +31,9 @@ class AngkatanController extends Controller
      */
     public function create()
     {
-        return view('data_angkatan.create');
+        $prodi = ProgramStudi::all();
+        $dosen = Dosen::all();
+        return view('data_angkatan.create', compact('prodi', 'dosen'));
     }
 
     /**
@@ -40,7 +44,10 @@ class AngkatanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'angkatan' => 'required|min:4|unique:angkatans,angkatan'
+            'kode_angkatan' => 'required|min:4|unique:angkatans,kode_angkatan',
+            'angkatan' => 'required',
+            'program_studi_id' => 'required',
+            'dosen_id' => 'required'
         ]);
 
         Angkatan::create($request->all());
@@ -53,9 +60,12 @@ class AngkatanController extends Controller
      *
      * @param  \App\Angkatan  $angkatan
      */
-    public function edit(Angkatan $angkatan)
+    public function edit($id)
     {
-        return view('data_angkatan.edit', compact('angkatan'));
+        $prodi = ProgramStudi::all();
+        $dosen = Dosen::all();
+        $angkatan = Angkatan::with('program_studi', 'dosen')->findOrFail($id);
+        return view('data_angkatan.edit', compact('prodi', 'dosen', 'angkatan'));
     }
 
     /**
@@ -66,7 +76,10 @@ class AngkatanController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'angkatan' => 'required|min:4|unique:angkatans,angkatan'
+            'kode_angkatan' => 'required|min:4|unique:angkatans,kode_angkatan,' . $id,
+            'angkatan' => 'required',
+            'program_studi_id' => 'required',
+            'dosen_id' => 'required'
         ]);
 
         $angkatan = Angkatan::findOrFail($id);

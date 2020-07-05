@@ -22,8 +22,6 @@ class Mahasiswa extends Model
         'no_hp',
         'avatar',
         'user_id',
-        'program_studi_id',
-        'semester_id',
         'angkatan_id'
     ];
 
@@ -41,18 +39,8 @@ class Mahasiswa extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function program_studi()
-    {
-        return $this->belongsTo(ProgramStudi::class);
-    }
-
-    public function semester()
-    {
-        return $this->belongsTo(Semester::class);
-    }
-
     public function angkatan()
     {
-        return $this->belongsTo(Angkatan::class);
+        return $this->belongsTo(Angkatan::class)->with('program_studi');
     }
 }

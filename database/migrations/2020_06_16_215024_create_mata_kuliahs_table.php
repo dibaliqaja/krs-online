@@ -17,7 +17,7 @@ class CreateMataKuliahsTable extends Migration
             $table->id();
             $table->string('kode_matkul')->unique();
             $table->string('nama_matkul');
-            $table->string('sks');
+            $table->integer('sks');
             $table->integer('semester');
             $table->unsignedBigInteger('dosen_id');
             $table->unsignedBigInteger('program_studi_id');

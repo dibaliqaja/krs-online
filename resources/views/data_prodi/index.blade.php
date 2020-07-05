@@ -40,22 +40,22 @@
     <br>
 
     <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table table-hover table-bordered">
             <thead>
                 <tr>
-                    <th width="10%">No</th>
+                    <th width="5%" style="text-align: center">No</th>
                     <th width="20%">Kode Prodi</th>
                     <th>Nama Prodi</th>
-                    <th width="15%">Action</th>
+                    <th width="15%" style="text-align: center">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($program_studi as $result => $hasil)
                     <tr>
-                        <td>{{ $result + $program_studi->firstitem() }}</td>
+                        <td align="center">{{ $result + $program_studi->firstitem() }}</td>
                         <td>{{ $hasil->kode_prodi }}</td>
                         <td>{{ $hasil->nama_prodi }}</td>
-                        <td>
+                        <td align="center">
                             <a href="{{ route('program-studi.edit', $hasil->id) }}" type="button" class="btn btn-sm btn-info"><i class="fas fa-pen"></i></a>
                             <a href="" class="btn btn-sm btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusProdiModal"><i class="fas fa-trash"></i></a>
                         </td>

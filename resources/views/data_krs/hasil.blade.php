@@ -3,7 +3,7 @@
 @section('content')
 
     @if (Session::has('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
         {{ Session('success') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
@@ -27,7 +27,7 @@
                 </select>
         </div>
         <div class="m-2">
-            <input type="submit" value="Filter" class="btn btn-primary">
+            <input type="submit" value="Pilih" class="btn btn-primary">
             </form>
         </div>
 

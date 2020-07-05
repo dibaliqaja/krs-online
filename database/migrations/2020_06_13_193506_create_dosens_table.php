@@ -25,7 +25,14 @@ class CreateDosensTable extends Migration
             $table->string('no_hp');
             $table->string('avatar')->nullable();
             $table->string('email')->unique();
+            $table->unsignedBigInteger('program_studi_id');
             $table->timestamps();
+
+            $table->foreign('program_studi_id')
+                ->references('id')
+                ->on('program_studis')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 

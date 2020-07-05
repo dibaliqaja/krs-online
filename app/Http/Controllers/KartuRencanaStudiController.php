@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\KartuRencanaStudi;
-use App\Mahasiswa;
 use App\MataKuliah;
 use App\ProgramStudi;
 use Illuminate\Http\Request;
@@ -20,21 +19,11 @@ class KartuRencanaStudiController extends Controller
     public function indexMahasiswa(Request $request)
     {
         $prodi = Auth::user()->mahasiswa->program_studi_id;
-        $semester = $request->get('semester');
-        $filterKeyword  = $request->get('keyword') ? $request->get('keyword') : '';
 
         $matkul = MataKuliah::with('program_studi')
                 ->where('program_studi_id', $prodi)
-                ->where('nama_matkul', 'LIKE', "%$filterKeyword%")
-                ->paginate(10);
-
-        if ($semester) {
-            $matkul = MataKuliah::with('program_studi')
-                ->where('program_studi_id', $prodi)
-                ->where('nama_matkul', 'LIKE', "%$filterKeyword%")
-                ->where('semester', $semester)
-                ->paginate(10);
-        }
+                ->orderBy('semester', 'asc')
+                ->paginate();
 
         return view('data_krs.index', compact('matkul'));
     }
@@ -48,10 +37,9 @@ class KartuRencanaStudiController extends Controller
     {
         $user = Auth::user()->mahasiswa->id;
         $semester = $request->get('semester');
-        $krs = KartuRencanaStudi::with('mahasiswa')->with('mata_kuliah')
-                    ->leftJoin('mahasiswas', 'mahasiswas.id', '=', 'kartu_rencana_studis.mahasiswa_id')
-                    ->leftJoin('mata_kuliahs', 'mata_kuliahs.id', '=', 'kartu_rencana_studis.mata_kuliah_id')
+        $krs = KartuRencanaStudi::leftJoin('mata_kuliahs', 'mata_kuliahs.id', '=', 'kartu_rencana_studis.mata_kuliah_id')
                     ->where('mahasiswa_id', $user)
+                    ->where('semester', $semester)
                     ->paginate(10);
 
         return view('data_krs.hasil', compact('krs'));
@@ -97,7 +85,7 @@ class KartuRencanaStudiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
     }
@@ -111,13 +99,19 @@ class KartuRencanaStudiController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user()->mahasiswa->id;
+
         $services = $request->input('matkul');
-        foreach ($services as $service) {
-            KartuRencanaStudi::create([
-                'mahasiswa_id' => $user,
-                'mata_kuliah_id' => $service,
-                'status' => 'pengajuan'
-            ]);
+
+        if ($services == NULL) {
+            return redirect()->route('mahasiswa.krs')->with('success', 'Anda belum memilih mata kuliah.');
+        } else {
+            foreach ($services as $service) {
+                KartuRencanaStudi::create([
+                    'mahasiswa_id' => $user,
+                    'mata_kuliah_id' => $service,
+                    'status' => 'pengajuan'
+                ]);
+            }
         }
 
         return redirect()->route('mahasiswa.krs.hasil')->with('success', 'Data Berhasil Disimpan, Status KRS "Pengajuan"');
@@ -155,11 +149,7 @@ class KartuRencanaStudiController extends Controller
     public function update($id)
     {
         $krs = KartuRencanaStudi::findOrFail($id);
-        if ($krs->status == "PENGAJUAN") {
-            $krs->status = "DITERIMA";
-        } else {
-            $krs->status = "PENGAJUAN";
-        }
+        $krs->status = "DITERIMA";
         $krs->save();
 
         return redirect()->back();

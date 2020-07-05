@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Angkatan;
 use App\Mahasiswa;
-use App\ProgramStudi;
-use App\Semester;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -19,29 +17,25 @@ class MahasiswaController extends Controller
      */
     public function index(Request $request)
     {
-        $program_studi = ProgramStudi::all();
-        $semester = Semester::all();
         $angkatan = Angkatan::all();
 
-        $prodi = $request->get('prodi');
-        $semester_m = $request->get('semester');
         $angkatan_m = $request->get('angkatan');
         $filterKeyword  = $request->get('keyword') ? $request->get('keyword') : '';
 
-        if ($filterKeyword && $prodi || $semester_m || $angkatan_m) {
+        $mahasiswa = Mahasiswa::latest()
+            ->with('angkatan')
+            ->where('name', 'LIKE', "%$filterKeyword%")
+            ->paginate(10);
+
+        if ($angkatan_m) {
             $mahasiswa = Mahasiswa::latest()
+                ->with('angkatan')
                 ->where('name', 'LIKE', "%$filterKeyword%")
-                ->where('program_studi_id', $prodi)
-                ->where('semester_id', $semester_m)
                 ->where('angkatan_id', $angkatan_m)
-                ->paginate(10);
-        } else {
-            $mahasiswa = Mahasiswa::latest()
-                ->where('name', 'LIKE', "%$filterKeyword%")
                 ->paginate(10);
         }
 
-        return view('data_mahasiswa.index', compact('mahasiswa', 'program_studi', 'semester', 'angkatan'));
+        return view('data_mahasiswa.index', compact('mahasiswa', 'angkatan'));
     }
 
     /**
@@ -51,10 +45,8 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        $prodi = ProgramStudi::all();
-        $semester = Semester::all();
         $angkatan = Angkatan::all();
-        return view('data_mahasiswa.create', compact('prodi', 'semester', 'angkatan'));
+        return view('data_mahasiswa.create', compact('angkatan'));
     }
 
     /**
@@ -78,9 +70,7 @@ class MahasiswaController extends Controller
             'password' => 'required',
             'password_confirmation' => 'required|same:password',
             'avatar' => 'image|max:1024',
-            'program_studis_id' => 'required',
-            'semesters_id' => 'required',
-            'angkatans_id' => 'required'
+            'angkatan_id' => 'required'
         ]);
 
         $user = User::create([
@@ -104,9 +94,7 @@ class MahasiswaController extends Controller
                 'agama' => $request->agama,
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
-                'program_studi_id' => $request->program_studis_id,
-                'semester_id' => $request->semesters_id,
-                'angkatan_id' => $request->angkatans_id,
+                'angkatan_id' => $request->angkatan_id,
                 'avatar'      => 'public/uploads/mahasiswa/'.$new_avatar,
                 'user_id' => $user->id
             ]);
@@ -122,9 +110,7 @@ class MahasiswaController extends Controller
                 'agama' => $request->agama,
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
-                'program_studi_id' => $request->program_studis_id,
-                'semester_id' => $request->semesters_id,
-                'angkatan_id' => $request->angkatans_id,
+                'angkatan_id' => $request->angkatan_id,
                 'user_id' => $user->id
             ]);
         }
@@ -140,7 +126,7 @@ class MahasiswaController extends Controller
      */
     public function show($id)
     {
-        $mahasiswa = Mahasiswa::with('program_studi', 'semester', 'angkatan')->findOrFail($id);
+        $mahasiswa = Mahasiswa::with('angkatan')->findOrFail($id);
         return view('data_mahasiswa.show', compact('mahasiswa'));
     }
 
@@ -152,11 +138,9 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        $prodi = ProgramStudi::all();
-        $semester = Semester::all();
         $angkatan = Angkatan::all();
-        $mahasiswa = Mahasiswa::with('program_studi', 'semester', 'angkatan')->findOrFail($id);
-        return view('data_mahasiswa.edit', compact('prodi', 'semester', 'angkatan', 'mahasiswa'));
+        $mahasiswa = Mahasiswa::with('angkatan')->findOrFail($id);
+        return view('data_mahasiswa.edit', compact('angkatan', 'mahasiswa'));
     }
 
     /**
@@ -168,6 +152,9 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        $user = User::findOrFail($mahasiswa->user->id);
+
         $this->validate($request, [
             'npm' => 'required|unique:mahasiswas,npm,' . $id,
             'name' => 'required',
@@ -177,17 +164,12 @@ class MahasiswaController extends Controller
             'agama' => 'required',
             'alamat' => 'required|min:5',
             'no_hp' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
+            'email' => 'required|email|unique:users,email,' . $user->id,
             'password' => 'required',
             'password_confirmation' => 'required|same:password',
             'avatar' => 'image|max:1024',
-            'program_studis_id' => 'required',
-            'semesters_id' => 'required',
-            'angkatans_id' => 'required'
+            'angkatan_id' => 'required'
         ]);
-
-        $mahasiswa = Mahasiswa::findOrFail($id);
-        $user = User::findOrFail($mahasiswa->user->id);
 
         if ($request->has('avatar')) {
             $avatar = $request->avatar;
@@ -203,9 +185,7 @@ class MahasiswaController extends Controller
                 'agama' => $request->agama,
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
-                'program_studi_id' => $request->program_studis_id,
-                'semester_id' => $request->semesters_id,
-                'angkatan_id' => $request->angkatans_id,
+                'angkatan_id' => $request->angkatan_id,
                 'avatar'      => 'public/uploads/mahasiswa/'.$new_avatar,
             ];
 
@@ -225,9 +205,7 @@ class MahasiswaController extends Controller
                 'agama' => $request->agama,
                 'alamat' => $request->alamat,
                 'no_hp' => $request->no_hp,
-                'program_studi_id' => $request->program_studis_id,
-                'semester_id' => $request->semesters_id,
-                'angkatan_id' => $request->angkatans_id,
+                'angkatan_id' => $request->angkatan_id,
             ];
 
             $user_data = [

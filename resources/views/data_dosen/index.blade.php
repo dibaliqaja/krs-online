@@ -43,10 +43,11 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th width="10%">No</th>
+                    <th width="5%">No</th>
                     <th>NIDN</th>
                     <th>Nama</th>
                     <th>Email</th>
+                    <th>Program Studi</th>
                     <th width="15%">Action</th>
                 </tr>
             </thead>
@@ -57,6 +58,7 @@
                         <td>{{ $hasil->nidn }}</td>
                         <td>{{ $hasil->nama }}</td>
                         <td>{{ $hasil->email }}</td>
+                        <td>{{ $hasil->program_studi->nama_prodi }}</td>
                         <td>
                             <a href="{{ route('dosen.show', $hasil->id) }}" type="button" class="btn btn-sm btn-warning"><i class="fas fa-eye"></i></a>
                             <a href="{{ route('dosen.edit', $hasil->id) }}" type="button" class="btn btn-sm btn-info"><i class="fas fa-pen"></i></a>

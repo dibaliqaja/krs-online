@@ -8,9 +8,14 @@ class ProgramStudi extends Model
 {
     protected $guarded = [];
 
-    public function mahasiswa()
+    public function dosen()
     {
-        return $this->hasMany(Mahasiswa::class);
+        return $this->hasMany(Dosen::class);
+    }
+
+    public function angkatan()
+    {
+        return $this->hasMany(Angkatan::class);
     }
 
     public function mata_kuliah()

@@ -60,15 +60,11 @@
         </div>
         <div class="form-group">
             <label for="">Program Studi</label>
-            <input type="email" class="form-control" name="email" value="{{ $mahasiswa->program_studi->nama_prodi }}" readonly>
-        </div>
-        <div class="form-group">
-            <label for="">Semester</label>
-            <input type="email" class="form-control" name="email" value="{{ $mahasiswa->semester->semester }}" readonly>
+            <input type="text" class="form-control" name="email" value="{{ $mahasiswa->angkatan->program_studi->nama_prodi }}" readonly>
         </div>
         <div class="form-group">
             <label for="">Angkatan</label>
-            <input type="email" class="form-control" name="email" value="{{ $mahasiswa->angkatan->angkatan }}" readonly>
+            <input type="angkatan_id" class="form-control" name="email" value="{{ $mahasiswa->angkatan->angkatan }}" readonly>
         </div>
     </form>
 

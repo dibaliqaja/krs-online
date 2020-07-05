@@ -25,26 +25,12 @@ class CreateMahasiswasTable extends Migration
             $table->string('no_hp');
             $table->string('avatar')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('program_studi_id');
-            $table->unsignedBigInteger('semester_id');
             $table->unsignedBigInteger('angkatan_id');
             $table->timestamps();
 
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->foreign('program_studi_id')
-                ->references('id')
-                ->on('program_studis')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->foreign('semester_id')
-                ->references('id')
-                ->on('semesters')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

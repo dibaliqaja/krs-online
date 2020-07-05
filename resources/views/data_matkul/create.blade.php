@@ -17,11 +17,11 @@
         @csrf
         <div class="form-group">
             <label for="">Kode Matkul</label>
-            <input type="text" class="form-control" name="kode_matkul" placeholder="T011" value="{{ old('kode_matkul') }}">
+            <input type="text" class="form-control" name="kode_matkul" value="{{ old('kode_matkul') }}">
         </div>
         <div class="form-group">
             <label for="">Nama Matkul</label>
-            <input type="text" class="form-control" name="nama_matkul" placeholder="Pemrograman 1" value="{{ old('nama_matkul') }}">
+            <input type="text" class="form-control" name="nama_matkul" value="{{ old('nama_matkul') }}">
         </div>
         <div class="form-group">
             <label for="">SKS</label>
