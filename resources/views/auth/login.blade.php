@@ -1,99 +1,104 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Sistem Kartu Rencana Studi</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;
-            background: linear-gradient(to left, #6777ef, #79e7fa);
-        }
-        h1 {
-            text-align: center;
-            font-weight: bold;
-        }
-        .tulisan_login {
-            text-align: center;
-            text-transform: uppercase;
-        }
-        .kotak_login {
-            border: 0;
-            width: 350px;
-            background: white;
-            border-radius: 9px;
-            margin: 120px auto;
-            padding: 30px 20px;
-            border: 1px solid #e2e2e2;
-        }
-        label {
-            font-size: 11pt;
-        }
-        .form_login {
-            background: rgb(255, 255, 255);
-            margin: 10px auto;
-            /* text-align: center; */
-            border: 1px solid #e2e2e2;
-            box-sizing: border-box;
-            border-radius: 5px;
-            width: 100%;
-            padding: 14px 10px;
-            font-size: 11pt;
-        }
-        .tombol_login {
-            background: #3bbaf4;
-            color: white;
-            font-size: 11pt;
-            width: 100%;
-            margin: 9px auto;
-            border: none;
-            border-radius: 5px;
-            /*pojok kotak*/
-            padding: 10px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .tombol_login[type="submit"]:hover {
-            background: #6bc6f0;
-        }
-    </style>
-</head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Login &mdash; Sistem Informasi Akademik</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/modules/fontawesome/css/all.min.css') }}">
+
+  <!-- CSS Libraries -->
+  <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap-social/bootstrap-social.css') }}">
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+</script>
+<!-- /END GA --></head>
 
 <body>
-    <div class="kotak_login">
-        @if (session('alert'))
-            <div class="alert alert-danger" role="alert">
-                {{ session('alert') }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+  <div id="app">
+    <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
+            <div class="login-brand">
+              <img src="{{ asset('assets/img/avatar/logo.png') }}" alt="logo" width="100">
             </div>
-        @endif
-        <h2 class="font-weight-bold text-center">Sistem</h2>
-        <h3 class="font-weight-bold text-center">Kartu Rencana Studi</h3>
-        <form action="postlogin" method="POST">
-            @csrf
-            <input type="text" name="username" class="form_login" placeholder="Username" required>
-            <input id="password" type="password" name="password" class="form_login" placeholder="Password" required>
-            <button type="submit" class="tombol_login">LOGIN</button>
-        </form>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-</body>
 
+            <div class="card card-primary">
+
+                @if (session('alert'))
+                    <div class="alert alert-danger m-2" role="alert">
+                        <div class="text-center">{{ session('alert') }}</div>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        </button>
+                    </div>
+                @endif
+
+              <div class="card-body">
+                <div class="text-center mb-4"><h6>Sistem Informasi Akademik <br>Universitas PGRI Ronggolawe Tuban</h6></div>
+                <form method="POST" action="postlogin" class="needs-validation" novalidate="">
+                    @csrf
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" type="username" class="form-control" name="username" tabindex="1" required autofocus>
+                    <div class="invalid-feedback">
+                      Masukkan username
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="d-block">
+                    	<label for="password" class="control-label">Password</label>
+                    </div>
+                    <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
+                    <div class="invalid-feedback">
+                      Masukkan password
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                      <div style="font-size: 15px">Login</div>
+                    </button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+            <div class="simple-footer">
+              Copyright &copy; Universitas PGRI Ronggolawe Tuban 2020
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="{{ asset('assets/modules/jquery.min.js') }}"></script>
+  <script src="{{ asset('assets/modules/tooltip.js') }}"></script>
+  <script src="{{ asset('assets/modules/bootstrap/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
+  <script src="{{ asset('assets/js/stisla.js') }}"></script>
+
+  <!-- JS Libraies -->
+
+  <!-- Page Specific JS File -->
+
+  <!-- Template JS File -->
+  <script src="{{ asset('assets/js/scripts.js') }}"></script>
+  <script src="{{ asset('assets/js/custom.js') }}"></script>
+</body>
 </html>
