@@ -21,12 +21,20 @@
         </button>
     </div>
     @endif
-
     <div class="row">
-        <div class="col-md-12 mt-1 float-right">
-        <form action="{{ route('mahasiswa.krs.store') }}" method="POST">
-            @csrf
-            <button class="btn btn-primary float-right" type="submit">Ambil KRS</button>
+        <div class="col-md-3 mb-2">
+            <form action="{{ route('mahasiswa.krs.store') }}" method="POST">
+                @csrf
+                <label for="">Pilih Tahun Ajaran Sekarang</label>
+                <select name="tahun_ajaran" id="tahun_ajaran" class="form-control select2">
+                    <option value="">Tahun Ajaran</option>
+                    @foreach ($tahun_ajaran as $item)
+                        <option value="{{ $item->id }}">{{ $item->tahun_ajaran }}</option>
+                    @endforeach
+                </select>
+        </div>
+        <div class="col-md-9 mt-1 float-right">
+                <button class="btn btn-primary float-right" type="submit">Ambil KRS</button>
         </div>
     </div>
     <br>

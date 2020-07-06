@@ -33,14 +33,14 @@
                 </div>
         </div>
         <div class="col-md-3 mb-2">
-                <select name="prodi" id="prodi" class="form-control">
-                    <option value="">Program Studi</option>
-                    @foreach ($program_studi as $item)
-                        <option {{ Request::get('prodi') == $item->id ? "selected" : "" }} value="{{ $item->id }}">{{ $item->nama_prodi }}</option>
+                <select name="angkatan" id="angkatan" class="form-control">
+                    <option value="">Angkatan</option>
+                    @foreach ($angkatan as $item)
+                        <option {{ Request::get('angkatan') == $item->id ? "selected" : "" }} value="{{ $item->id }}">{{ $item->angkatan }} - {{ $item->program_studi->nama_prodi }}</option>
                     @endforeach
                 </select>
         </div>
-        <div class="col md-2 mb-2">
+        {{-- <div class="col md-2 mb-2">
                 <select name="semester" id="semester" class="form-control">
                     <option value="">Semester</option>
                     <option {{ Request::get('semester') == "1" ? "selected" : "" }} value="1">1</option>
@@ -52,12 +52,12 @@
                     <option {{ Request::get('semester') == "7" ? "selected" : "" }} value="7">7</option>
                     <option {{ Request::get('semester') == "8" ? "selected" : "" }} value="8">8</option>
                 </select>
-        </div>
+        </div> --}}
         <div class="col md-2">
                 <select name="status" id="status" class="form-control">
                     <option value="">Status</option>
-                    <option {{ Request::get('status') == "PENGAJUAN" ? "selected" : "" }} value="PENGAJUAN">Pengajuan</option>
-                    <option {{ Request::get('status') == "DITERIMA" ? "selected" : "" }} value="DITERIMA">Diterima</option>
+                    <option {{ Request::get('status') == "PENGAJUAN" ? "selected" : "" }} value="PENGAJUAN">PENGAJUAN</option>
+                    <option {{ Request::get('status') == "TERIMA" ? "selected" : "" }} value="TERIMA">TERIMA</option>
                 </select>
         </div>
         <div class="col-md-1">
@@ -85,7 +85,7 @@
                     <th width="10%">Kode Matkul</th>
                     <th>Nama Matkul</th>
                     <th>Status</th>
-                    <th width="5%">Action</th>
+                    <th width="15%">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -99,7 +99,7 @@
                         <td>
                             @if ($hasil->status == "PENGAJUAN")
                                 <span class="badge badge-warning">{{ $hasil->status }}</span>
-                            @elseif ($hasil->status == "DITERIMA")
+                            @elseif ($hasil->status == "TERIMA")
                                 <span class="badge badge-success">{{ $hasil->status }}</span>
                             @endif
                         </td>

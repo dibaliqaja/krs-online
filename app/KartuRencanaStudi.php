@@ -17,4 +17,9 @@ class KartuRencanaStudi extends Model
     {
         return $this->belongsTo(MataKuliah::class);
     }
+
+    public function tahun_ajaran()
+    {
+        return $this->belongsToMany(TahunAjaran::class);
+    }
 }
