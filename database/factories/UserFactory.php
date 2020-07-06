@@ -1,7 +1,5 @@
 <?php
 
-// /** @var \Illuminate\Database\Eloquent\Factory $factory */
-
 use App\User;
 use Illuminate\Support\Facades\Hash;
 
