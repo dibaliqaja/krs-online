@@ -41,6 +41,6 @@ class Mahasiswa extends Model
 
     public function angkatan()
     {
-        return $this->belongsTo(Angkatan::class)->with('program_studi');
+        return $this->belongsTo(Angkatan::class)->with('program_studi', 'tahun_ajaran');
     }
 }

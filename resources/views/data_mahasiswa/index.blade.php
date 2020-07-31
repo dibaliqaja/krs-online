@@ -58,15 +58,15 @@
     <br>
 
     <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table table-hover table-bordered">
             <thead>
-                <tr>
+                <tr align="center">
                     <th width="10%">No</th>
                     <th>NPM</th>
                     <th>Nama</th>
                     <th>Program Studi</th>
                     <th>Angkatan</th>
-                    <th width="15%">Action</th>
+                    <th width="20%">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -77,7 +77,7 @@
                         <td>{{ $hasil->user->name }}</td>
                         <td>{{ $hasil->angkatan->program_studi->nama_prodi }}</td>
                         <td>{{ $hasil->angkatan->angkatan }}</td>
-                        <td>
+                        <td align="center">
                             <a href="{{ route('mahasiswa.show', $hasil->id) }}" type="button" class="btn btn-sm btn-warning"><i class="fas fa-eye"></i></a>
                             <a href="{{ route('mahasiswa.edit', $hasil->id) }}" type="button" class="btn btn-sm btn-info"><i class="fas fa-pen"></i></a>
                             <a href="" class="btn btn-sm btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusMahasiswaModal"><i class="fas fa-trash"></i></a>

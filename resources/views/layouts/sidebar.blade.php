@@ -1,10 +1,10 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.html">KRS ONLINE</a>
+            <a href="index.html">Akademik</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">KRS</a>
+            <a href="index.html">SIA</a>
         </div>
         <ul class="sidebar-menu">
             @if (auth()->user()->role == 'admin')
@@ -18,16 +18,11 @@
                     <ul class="dropdown-menu">
                         <li><a class="nav-link" href="{{ url('/program-studi') }}">Program Studi</a></li>
                         <li><a class="nav-link" href="{{ url('/dosen') }}">Dosen</a></li>
-                        <li><a class="nav-link" href="{{ url('/angkatan') }}">Angkatan</a></li>
                         <li><a class="nav-link" href="{{ url('/tahun-ajaran') }}">Tahun Ajaran</a></li>
+                        <li><a class="nav-link" href="{{ url('/angkatan') }}">Angkatan</a></li>
                         <li><a class="nav-link" href="{{ url('/mata-kuliah') }}">Mata Kuliah</a></li>
                     </ul>
                 </li>
-                {{-- <li>
-                    <a class="nav-link" href="{{ url('/dosen') }}"><i class="fas fa-chalkboard-teacher"></i>
-                        <span>Dosen</span>
-                    </a>
-                </li> --}}
                 <li>
                     <a class="nav-link" href="{{ url('/mahasiswa') }}"><i class="fas fa-user-graduate"></i>
                         <span>Mahasiswa</span>
@@ -51,7 +46,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="nav-link" href="{{ route('mahasiswa.krs') }}">Ambil KRS</a></li>
                         <li><a class="nav-link" href="{{ route('mahasiswa.krs.hasil') }}">Cetak KRS</a></li>
-                        <li><a class="nav-link" href="#">Hapus KRS</a></li>
+                        <li><a class="nav-link" href="{{ route('krs.hapus') }}">Hapus KRS</a></li>
                     </ul>
                 </li>
             @endif

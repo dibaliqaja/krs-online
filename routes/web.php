@@ -30,11 +30,14 @@ Route::group(['middleware' => ['auth', 'CheckRole:mahasiswa']], function () {
     Route::get('profile/mahasiswa', 'ProfileMahasiswaController@edit')->name('profile.mahasiswa.edit');
     Route::patch('profile/mahasiswa', 'ProfileMahasiswaController@update')->name('profile.mahasiswa.update');
 
-    Route::get('kartu-rencana-studi/mahasiswa', 'KartuRencanaStudiController@indexMahasiswa')->name('mahasiswa.krs');
+    Route::get('kartu-rencana-stud  i/mahasiswa/ambil-krs', 'KartuRencanaStudiController@indexMahasiswa')->name('mahasiswa.krs');
     // Route::post('kartu-rencana-studi/mahasiswa/pilih', 'KartuRencanaStudiController@create')->name('mahasiswa.krs.create');
     Route::post('kartu-rencana-studi/mahasiswa', 'KartuRencanaStudiController@store')->name('mahasiswa.krs.store');
-    Route::get('kartu-rencana-studi/mahasiswa/hasil', 'KartuRencanaStudiController@indexMahasiswaHasil')->name('mahasiswa.krs.hasil');
+    Route::get('kartu-rencana-studi/mahasiswa/hasil-krs', 'KartuRencanaStudiController@indexMahasiswaHasil')->name('mahasiswa.krs.hasil');
+    Route::get('kartu-rencana-studi/mahasiswa/hapus-krs', 'KartuRencanaStudiController@indexMahasiswaHapus')->name('krs.hapus');
     Route::post('kartu-rencana-studi/mahasiswa/delete', 'KartuRencanaStudiController@delete')->name('mahasiswa.krs.delete');
+    Route::delete('kartu-rencana-studi/mahasiswa/{id}', 'KartuRencanaStudiController@destroyM')->name('mahasiswa.krs.destroy');
+    Route::get('kartu-rencana-studi/print-krs', 'KartuRencanaStudiController@print')->name('print.krs');
 
 });
 
@@ -60,7 +63,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin']], function () {
 
     Route::get('kartu-rencana-studi/admin', 'KartuRencanaStudiController@indexAdmin')->name('admin.krs');
     Route::post('kartu-rencana-studi/admin/{id}', 'KartuRencanaStudiController@update')->name('admin.krs.update');
-    Route::delete('kartu-rencana-studi/admin', 'KartuRencanaStudiController@destroy')->name('admin.krs.destroy');
+    Route::delete('kartu-rencana-studi/admin/{id}', 'KartuRencanaStudiController@destroy')->name('admin.krs.destroy');
 
 });
 

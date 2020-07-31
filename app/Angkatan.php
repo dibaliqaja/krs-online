@@ -18,6 +18,11 @@ class Angkatan extends Model
         return $this->belongsTo(ProgramStudi::class);
     }
 
+    public function tahun_ajaran()
+    {
+        return $this->belongsTo(TahunAjaran::class);
+    }
+
     public function mahasiswa()
     {
         return $this->hasMany(Mahasiswa::class);

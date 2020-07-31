@@ -40,15 +40,15 @@
     <br>
 
     <div class="table-responsive">
-        <table class="table table-hover">
+        <table class="table table-hover table-bordered">
             <thead>
-                <tr>
+                <tr align="center">
                     <th width="5%">No</th>
                     <th>NIDN</th>
                     <th>Nama</th>
                     <th>Email</th>
                     <th>Program Studi</th>
-                    <th width="15%">Action</th>
+                    <th width="20%">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -59,7 +59,7 @@
                         <td>{{ $hasil->nama }}</td>
                         <td>{{ $hasil->email }}</td>
                         <td>{{ $hasil->program_studi->nama_prodi }}</td>
-                        <td>
+                        <td align="center">
                             <a href="{{ route('dosen.show', $hasil->id) }}" type="button" class="btn btn-sm btn-warning"><i class="fas fa-eye"></i></a>
                             <a href="{{ route('dosen.edit', $hasil->id) }}" type="button" class="btn btn-sm btn-info"><i class="fas fa-pen"></i></a>
                             <a href="" class="btn btn-sm btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusDosenModal"><i class="fas fa-trash"></i></a>

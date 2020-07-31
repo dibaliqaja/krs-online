@@ -17,7 +17,6 @@ class CreateKartuRencanaStudisTable extends Migration
             $table->id();
             $table->unsignedBigInteger('mahasiswa_id');
             $table->unsignedBigInteger('mata_kuliah_id');
-            $table->unsignedBigInteger('tahun_ajaran_id');
             $table->enum('status',['PENGAJUAN', 'TERIMA']);
             $table->timestamps();
 
@@ -30,12 +29,6 @@ class CreateKartuRencanaStudisTable extends Migration
             $table->foreign('mata_kuliah_id')
                 ->references('id')
                 ->on('mata_kuliahs')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->foreign('tahun_ajaran_id')
-                ->references('id')
-                ->on('tahun_ajarans')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

@@ -19,6 +19,7 @@ class CreateAngkatansTable extends Migration
             $table->string('angkatan');
             $table->unsignedBigInteger('dosen_id');
             $table->unsignedBigInteger('program_studi_id');
+            $table->unsignedBigInteger('tahun_ajaran_id');
             $table->timestamps();
 
             $table->foreign('dosen_id')
@@ -30,6 +31,12 @@ class CreateAngkatansTable extends Migration
             $table->foreign('program_studi_id')
                 ->references('id')
                 ->on('program_studis')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
+            $table->foreign('tahun_ajaran_id')
+                ->references('id')
+                ->on('tahun_ajarans')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

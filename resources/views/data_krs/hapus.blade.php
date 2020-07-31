@@ -13,7 +13,7 @@
 
     <div class="row">
         <div class="col-md-2 m-1">
-            <form action="{{ route('mahasiswa.krs.hasil') }}">
+            <form action="{{ route('krs.hapus') }}">
                 <select name="semester" id="semester" class="form-control">
                     <option value="">Semester</option>
                     <option {{ Request::get('semester') == "1" ? "selected" : "" }} value="1">1</option>
@@ -26,13 +26,9 @@
                     <option {{ Request::get('semester') == "8" ? "selected" : "" }} value="8">8</option>
                 </select>
         </div>
-        <div class="col-md-8 m-2">
+        <div class="col-md-2 m-2">
             <input type="submit" value="Pilih" class="btn btn-primary">
             </form>
-        </div>
-
-        <div class="col-md-1 m-2 float-align">
-            <a href="{{ asset('/assets/img/avatar/krs.pdf') }}" target="_blank" class="btn btn-primary" type="submit">Cetak KRS</a>
         </div>
     </div>
     <br>
@@ -46,6 +42,7 @@
                     <th>Nama Matkul</th>
                     <th>Semester</th>
                     <th>Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,6 +59,9 @@
                                 <span class="badge badge-success">{{ $hasil->status }}</span>
                             @endif
                         </td>
+                        <td>
+                                <a href="" class="btn btn-sm btn-danger m-1" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusKRSModal"><i class="fas fa-trash"></i></a>
+                        </td>
                     </tr>
                 @empty
                     <tr>
@@ -70,8 +70,51 @@
                 @endforelse
             </tbody>
         </table>
-        </form>
     </div>
     {{ $krs->links() }}
 
+@endsection
+
+@section('modal')
+
+    <!-- Modal Delete -->
+    <div class="modal fade" id="hapusKRSModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <form action="" id="deleteForm" method="post">
+                @csrf
+                @method('delete')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="vcenter">Hapus Data</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Apakah anda yakin?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger" onclick="formSubmit()">Hapus</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+@endsection
+
+@section('script')
+    <script>
+    function deleteData(id) {
+        var id = id;
+        var url = '{{ route("mahasiswa.krs.destroy", ":id") }}';
+        url = url.replace(':id', id);
+        $("#deleteForm").attr('action', url);
+    }
+
+    function formSubmit() {
+        $("#deleteForm").submit();
+    }
+    </script>
 @endsection

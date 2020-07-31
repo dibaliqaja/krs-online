@@ -10,7 +10,7 @@ class KartuRencanaStudi extends Model
 
     public function mahasiswa()
     {
-        return $this->belongsTo(Mahasiswa::class)->with('program_studi');
+        return $this->belongsTo(Mahasiswa::class)->with('angkatan');
     }
 
     public function mata_kuliah()
@@ -18,8 +18,8 @@ class KartuRencanaStudi extends Model
         return $this->belongsTo(MataKuliah::class);
     }
 
-    public function tahun_ajaran()
+    public function angkatan()
     {
-        return $this->belongsToMany(TahunAjaran::class);
+        return $this->belongsToMany(Angkatan::class);
     }
 }

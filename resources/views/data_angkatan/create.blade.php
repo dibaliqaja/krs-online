@@ -40,6 +40,14 @@
             </select>
         </div>
         <div class="form-group">
+            <label for="">Tahun Ajaran</label>
+            <select class="form-control select2" name="tahun_ajaran_id">
+                @foreach ($ta as $result)
+                    <option value="{{ $result->id }}">{{ $result->tahun_ajaran }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
             <button class="btn btn-primary">Tambah</button>
             <a href="{{ route('angkatan.index') }}" class="btn btn-danger">Kembali</a>
         </div>

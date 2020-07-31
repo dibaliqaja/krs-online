@@ -48,6 +48,7 @@
                     <th>Angkatan</th>
                     <th>Nama Prodi</th>
                     <th>Pembimbing Akademik</th>
+                    <th>Tahun Ajaran</th>
                     <th width="15%">Action</th>
                 </tr>
             </thead>
@@ -59,6 +60,7 @@
                         <td>{{ $hasil->angkatan }}</td>
                         <td>{{ $hasil->program_studi->nama_prodi }}</td>
                         <td>{{ $hasil->dosen->nama }}</td>
+                        <td>{{ $hasil->tahun_ajaran->tahun_ajaran }}</td>
                         <td>
                             <a href="{{ route('angkatan.edit', $hasil->id) }}" type="button" class="btn btn-sm btn-info"><i class="fas fa-pen"></i></a>
                             <a href="" class="btn btn-sm btn-danger" onclick="deleteData({{ $hasil->id }})" data-toggle="modal" data-target="#hapusAngkatanModal"><i class="fas fa-trash"></i></a>

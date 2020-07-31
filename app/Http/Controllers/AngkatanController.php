@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Angkatan;
 use App\Dosen;
 use App\ProgramStudi;
+use App\TahunAjaran;
 use Illuminate\Http\Request;
 
 class AngkatanController extends Controller
@@ -33,7 +34,8 @@ class AngkatanController extends Controller
     {
         $prodi = ProgramStudi::all();
         $dosen = Dosen::all();
-        return view('data_angkatan.create', compact('prodi', 'dosen'));
+        $ta = TahunAjaran::all();
+        return view('data_angkatan.create', compact('prodi', 'dosen', 'ta'));
     }
 
     /**
@@ -47,7 +49,8 @@ class AngkatanController extends Controller
             'kode_angkatan' => 'required|min:4|unique:angkatans,kode_angkatan',
             'angkatan' => 'required',
             'program_studi_id' => 'required',
-            'dosen_id' => 'required'
+            'dosen_id' => 'required',
+            'tahun_ajaran_id' => 'required'
         ]);
 
         Angkatan::create($request->all());
@@ -64,8 +67,9 @@ class AngkatanController extends Controller
     {
         $prodi = ProgramStudi::all();
         $dosen = Dosen::all();
-        $angkatan = Angkatan::with('program_studi', 'dosen')->findOrFail($id);
-        return view('data_angkatan.edit', compact('prodi', 'dosen', 'angkatan'));
+        $ta = TahunAjaran::all();
+        $angkatan = Angkatan::with('program_studi', 'dosen', 'tahun_ajaran')->findOrFail($id);
+        return view('data_angkatan.edit', compact('prodi', 'dosen', 'angkatan', 'ta'));
     }
 
     /**
@@ -79,7 +83,8 @@ class AngkatanController extends Controller
             'kode_angkatan' => 'required|min:4|unique:angkatans,kode_angkatan,' . $id,
             'angkatan' => 'required',
             'program_studi_id' => 'required',
-            'dosen_id' => 'required'
+            'dosen_id' => 'required',
+            'tahun_ajaran_id' => 'required'
         ]);
 
         $angkatan = Angkatan::findOrFail($id);
