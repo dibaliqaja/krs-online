@@ -27,7 +27,7 @@ for(var i = 0; i < chats.length; i++) {
   if(chats[i].typing != undefined) type = 'typing';
   $.chatCtrl('#mychatbox', {
     text: (chats[i].text != undefined ? chats[i].text : ''),
-    picture: (chats[i].position == 'left' ? '../dist/img/avatar/avatar-1.png' : '../dist/img/avatar/avatar-2.png'),
+    picture: (chats[i].position == 'left' ? 'assets/img/avatar/avatar-1.png' : 'assets/img/avatar/avatar-1.png'),
     position: 'chat-'+chats[i].position,
     type: type
   });
@@ -36,63 +36,31 @@ for(var i = 0; i < chats.length; i++) {
 $("#chat-form").submit(function() {
   var me = $(this);
 
-  if(me.find('input').val().trim().length > 0) {      
+  if(me.find('input').val().trim().length > 0) {
     $.chatCtrl('#mychatbox', {
       text: me.find('input').val(),
-      picture: '../dist/img/avatar/avatar-2.png',
+      picture: 'assets/img/avatar/avatar-1.png',
     });
     me.find('input').val('');
-  } 
+  }
   return false;
 });
 
 var chats = [
   {
-    text: 'Wake up!',
+    text: 'Hai!',
     position: 'left'
   },
   {
-    text: 'Yes, already',
+    text: 'Hai, juga',
     position: 'right'
   },
   {
-    text: 'Grab a brush and put a little make-up',
+    text: 'Cuma ngetest aja',
     position: 'left'
   },
   {
-    text: 'What do you mean?',
-    position: 'right'
-  },
-  {
-    text: 'Hide the scars to fade away the shake-up',
-    position: 'left'
-  },
-  {
-    text: 'WTF?!',
-    position: 'right'
-  },
-  {
-    text: 'Why\'d you leave the keys upon the table?',
-    position: 'left'
-  },
-  {
-    text: '-__________________-',
-    position: 'right'
-  },
-  {
-    text: 'Here you go create another fable',
-    position: 'left'
-  },
-  {
-    text: 'You wanted do!',
-    position: 'right'
-  },
-  {
-    text: 'FXCK!',
-    position: 'right'
-  },
-  {
-    text: '<i>You have blocked Ryan</i>',
+    text: 'Siapppp',
     position: 'right'
   },
 ];
@@ -101,7 +69,7 @@ for(var i = 0; i < chats.length; i++) {
   if(chats[i].typing != undefined) type = 'typing';
   $.chatCtrl('#mychatbox2', {
     text: (chats[i].text != undefined ? chats[i].text : ''),
-    picture: (chats[i].position == 'left' ? '../dist/img/avatar/avatar-5.png' : '../dist/img/avatar/avatar-2.png'),
+    picture: (chats[i].position == 'left' ? 'assets/img/avatar/avatar-1.png' : 'assets/img/avatar/avatar-1.png'),
     position: 'chat-'+chats[i].position,
     type: type
   });
@@ -109,12 +77,12 @@ for(var i = 0; i < chats.length; i++) {
 $("#chat-form2").submit(function() {
   var me = $(this);
 
-  if(me.find('input').val().trim().length > 0) {      
+  if(me.find('input').val().trim().length > 0) {
     $.chatCtrl('#mychatbox2', {
       text: me.find('input').val(),
-      picture: '../dist/img/avatar/avatar-2.png',
+      picture: 'assets/img/avatar/avatar-1.png',
     });
     me.find('input').val('');
-  } 
+  }
   return false;
 });

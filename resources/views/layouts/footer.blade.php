@@ -1,7 +1,7 @@
 <footer class="main-footer">
     <div class="footer-left">
         Copyright &copy; 2020 <div class="bullet">
-            </div> Sistem Kartu Rencana Studi Online
+            </div> Universitas PGRI Ronggolawe Tuban
     </div>
     <div class="footer-right">
 
@@ -14,11 +14,13 @@
 
 <!-- General JS Scripts -->
 <script src="{{ asset('assets/modules/jquery.min.js') }}"></script>
+<script src="{{ asset('assets/modules/popper.js') }}"></script>
 <script src="{{ asset('assets/modules/bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
 <script src="{{ asset('assets/modules/moment.min.js') }}"></script>
 <script src="{{ asset('assets/js/stisla.js') }}"></script>
 <script src="{{ asset('assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
+<script src="{{ asset('assets/js/page/components-chat-box.js') }}"></script>
 
 <!-- Template JS File -->
 <script src="{{ asset('assets/js/scripts.js') }}"></script>

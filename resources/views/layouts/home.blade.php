@@ -42,6 +42,12 @@
                                     class="fas fa-bars"></i></a></li>
                     </ul>
                 </form>
+                <label class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-switch-input" id="darkSwitch">
+                    <span class="custom-switch-indicator"></span>
+                    <span class="custom-switch-description" id="mode"></span>
+                </label>
+                <script src="{{ asset('assets/js/dark-mode-switch.js') }}"></script>
                 <ul class="navbar-nav navbar-right">
                     <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                             class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
@@ -134,6 +140,24 @@
                         </div>
                     </div>
                 </section>
+
+                {{-- <div class="col-12 col-sm-6 col-lg-4 float-right">
+                    <div class="card chat-box card-success" id="mychatbox2">
+                        <div class="card-header">
+                            <h4><i class="fas fa-circle text-success mr-2" title="Online" data-toggle="tooltip"></i> Chat with Hasan</h4>
+                        </div>
+                        <div class="card-body chat-content">
+                        </div>
+                        <div class="card-footer chat-form">
+                            <form id="chat-form2">
+                                <input type="text" class="form-control" placeholder="Type a message">
+                                <button class="btn btn-primary">
+                                    <i class="far fa-paper-plane"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div> --}}
             </div>
             <!-- End Main Content -->
 
