@@ -39,6 +39,11 @@ Route::group(['middleware' => ['auth', 'CheckRole:mahasiswa']], function () {
     Route::delete('kartu-rencana-studi/mahasiswa/{id}', 'KartuRencanaStudiController@destroyM')->name('mahasiswa.krs.destroy');
     Route::get('kartu-rencana-studi/print-krs', 'KartuRencanaStudiController@print')->name('print.krs');
 
+    Route::get('markAsRead', function() {
+        auth()->user()->unreadNotifications->markAsRead();
+        return redirect()->back();
+    })->name('mark.as.read');
+
 });
 
 Route::group(['middleware' => ['auth', 'CheckRole:admin']], function () {

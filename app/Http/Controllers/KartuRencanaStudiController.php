@@ -123,7 +123,6 @@ class KartuRencanaStudiController extends Controller
             ->leftJoin('mata_kuliahs', 'mata_kuliahs.id', '=', 'kartu_rencana_studis.mata_kuliah_id')
             ->where('mahasiswas.npm', "LIKE", "%$keyword%")
             ->paginate(10);
-            // dd($krs);
 
         return view('data_krs.admin.index', compact('krs', 'angkatan', 'ta'));
     }
@@ -199,6 +198,18 @@ class KartuRencanaStudiController extends Controller
         $krs = KartuRencanaStudi::findOrFail($id);
         $krs->status = "TERIMA";
         $krs->save();
+
+        $krsa = DB::table('kartu_rencana_studis')
+            ->where('kartu_rencana_studis.id', $krs->id)
+            ->leftJoin('mahasiswas', 'mahasiswas.id', '=', 'kartu_rencana_studis.mahasiswa_id')
+            ->leftJoin('mata_kuliahs', 'mata_kuliahs.id', '=', 'kartu_rencana_studis.mata_kuliah_id')
+            ->first();
+
+        $user = \App\User::findOrFail($krsa->user_id);
+        $details = [
+            'body' => "Matkul $krsa->nama_matkul telah diterima oleh Admin",
+        ];
+        $user->notify(new \App\Notifications\KRSTerima($details));
 
         return redirect()->back();
     }

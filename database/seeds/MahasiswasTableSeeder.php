@@ -14,9 +14,9 @@ class MahasiswasTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'username' => '1412180001',
-            'name' => 'Ahmad Baduri',
-            'email' => 'baduri@gmail.com',
+            'username' => '1412160018',
+            'name' => 'Ita Pristanti',
+            'email' => 'itap@gmail.com',
             'password' => Hash::make('111'),
             'role' => 'mahasiswa',
             'created_at' => now(),
@@ -25,13 +25,13 @@ class MahasiswasTableSeeder extends Seeder
 
         DB::table('mahasiswas')->insert(
             [
-                'npm' => '1412180001',
-                'name' => 'Ahmad Baduri',
-                'jenis_kelamin' => 'Laki-Laki',
+                'npm' => '1412160018',
+                'name' => 'Ita Pristanti',
+                'jenis_kelamin' => 'Perempuan',
                 'tempat_lahir' => 'Tuban',
-                'tgl_lahir' => '1995-05-02',
+                'tgl_lahir' => '1998-05-02',
                 'agama' => 'Islam',
-                'alamat' => 'Jalan Buntu Barat No. 555, Tuban',
+                'alamat' => 'Jalan Buntu Barat No. 555, Rengel',
                 'no_hp' => '085333322245',
                 'user_id' => 2,
                 'angkatan_id' => 1,

@@ -2264,6 +2264,10 @@ a.dropdown-item {
         margin-bottom: 0; }
     .dropdown-list .dropdown-item:focus {
       background-color: #6777ef; }
+
+      [data-theme="dark"] .dropdown-list .dropdown-item:focus {
+        background-color: #202029; }
+
       .dropdown-list .dropdown-item:focus .dropdown-item-desc {
         color: #fff !important; }
         .dropdown-list .dropdown-item:focus .dropdown-item-desc b {
@@ -2285,7 +2289,7 @@ a.dropdown-item {
           color: #15161b; }
 
     .dropdown-list .dropdown-item.dropdown-item-unread {
-      background-color: #fbfbfb;
+      background-color: #d4d3d3;
       border-bottom-color: #f2f2f2; }
 
       [data-theme="dark"] .dropdown-list .dropdown-item.dropdown-item-unread {

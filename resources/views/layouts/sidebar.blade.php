@@ -115,6 +115,7 @@
                         <li><a class="nav-link" href="#">History Peminjaman</a></li>
                     </ul>
                 </li>
+                <li><a class="nav-link" href="#"><i class="fas fa-history"></i> <span>Riwayat Aktifitas</span></a></li>
                 <li class="menu-header">Who's Online?</li>
                 <li>
                     <a class="nav-link" href="#">

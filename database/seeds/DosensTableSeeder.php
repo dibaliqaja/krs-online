@@ -14,15 +14,15 @@ class DosensTableSeeder extends Seeder
     {
         DB::table('dosens')->insert(
             [
-                'nidn' => '4112424249',
-                'nama' => 'Finda Gamalama, S.Kom, M.Kom',
-                'jenis_kelamin' => 'Perempuan',
+                'nidn' => '0726047704',
+                'nama' => 'Andy Haryoko, S.T, M.T',
+                'jenis_kelamin' => 'Laki-Laki',
                 'tempat_lahir' => 'Tuban',
                 'tgl_lahir' => '1970-02-02',
                 'agama' => 'Islam',
                 'alamat' => 'Jalan Monginsidi No. 555, Jawa Timur',
                 'no_hp' => '085333333221',
-                'email' => 'finda@gmail.com',
+                'email' => 'andyharyoko@unirow.ac.id',
                 'program_studi_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -31,15 +31,32 @@ class DosensTableSeeder extends Seeder
 
         DB::table('dosens')->insert(
             [
-                'nidn' => '4112424241',
-                'nama' => 'Adi Gumilang, S.Kom, M.Kom',
+                'nidn' => '0725038101',
+                'nama' => 'Andik Adi Suryanto, S.Kom, M.Kom',
                 'jenis_kelamin' => 'Laki-Laki',
-                'tempat_lahir' => 'Surabaya',
+                'tempat_lahir' => 'Tuban',
                 'tgl_lahir' => '1980-07-02',
                 'agama' => 'Islam',
                 'alamat' => 'Jalan Soekarno Hatta No. 12, Surabaya',
                 'no_hp' => '085333333299',
-                'email' => 'adi@gmail.com',
+                'email' => 'andikadis@unirow.ac.id',
+                'program_studi_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
+        DB::table('dosens')->insert(
+            [
+                'nidn' => '07123123133',
+                'nama' => 'Alfian Nurlifa, S.Kom, M.Kom',
+                'jenis_kelamin' => 'Perempuan',
+                'tempat_lahir' => 'Tuban',
+                'tgl_lahir' => '1980-07-02',
+                'agama' => 'Islam',
+                'alamat' => 'Jalan Soekarno Hatta No. 12, Surabaya',
+                'no_hp' => '085333333299',
+                'email' => 'alfiannur@unirow.ac.id',
                 'program_studi_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now(),

@@ -33,7 +33,7 @@
                 </div>
         </div>
     </div>
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-md-4 mb-2">
             <select name="angkatan" id="angkatan" class="form-control select2">
                 <option value="">Angkatan</option>
@@ -69,7 +69,7 @@
                 <a href="{{ route('admin.krs') }}" class="btn btn-info">Reset</a>
             </div>
         </div>
-    </div>
+    </div> --}}
     <br>
 
     <div class="table-responsive">

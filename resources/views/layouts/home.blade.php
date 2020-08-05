@@ -54,31 +54,35 @@
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
                             <div class="dropdown-header">Notifications
                                 <div class="float-right">
-                                    <a href="#">Mark All As Read</a>
+                                    <a href="{{ route('mark.as.read') }}">Mark All As Read</a>
                                 </div>
                             </div>
                             <div class="dropdown-list-content dropdown-list-icons">
-                                <a href="#" class="dropdown-item dropdown-item-unread">
-                                    <div class="dropdown-item-icon bg-primary text-white">
-                                        <i class="fas fa-code"></i>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        Template update is available now!
-                                        <div class="time text-primary">2 Min Ago</div>
-                                    </div>
-                                </a>
-                                <a href="#" class="dropdown-item">
-                                    <div class="dropdown-item-icon bg-success text-white">
-                                        <i class="fas fa-check"></i>
-                                    </div>
-                                    <div class="dropdown-item-desc">
-                                        <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
-                                        <div class="time">12 Hours Ago</div>
-                                    </div>
-                                </a>
+                                @foreach (auth()->user()->unreadNotifications as $notification)
+                                    <a href="#" class="dropdown-item dropdown-item-unread">
+                                        <div class="dropdown-item-icon bg-success text-white">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <div class="dropdown-item-desc">
+                                            <p class="font-weight-600">{{ $notification->data['data'] }}</p>
+                                            <div class="time">{{ $notification->created_at->diffForHumans() }}</div>
+                                        </div>
+                                    </a>
+                                @endforeach
+                                @foreach (auth()->user()->readNotifications as $notification)
+                                    <a href="#" class="dropdown-item">
+                                        <div class="dropdown-item-icon bg-success text-white">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <div class="dropdown-item-desc">
+                                            <p class="font-weight-600">{{ $notification->data['data'] }}</p>
+                                            <div class="time">{{ $notification->created_at->diffForHumans() }}</div>
+                                        </div>
+                                    </a>
+                                @endforeach
                             </div>
                             <div class="dropdown-footer text-center">
-                                <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+                                {{-- <a href="#">View All <i class="fas fa-chevron-right"></i></a> --}}
                             </div>
                         </div>
                     </li>

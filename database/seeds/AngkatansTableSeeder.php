@@ -14,6 +14,18 @@ class AngkatansTableSeeder extends Seeder
     {
         DB::table('angkatans')->insert(
             [
+                'kode_angkatan' => 'TF216A',
+                'angkatan' => '2016 A',
+                'program_studi_id' => 1,
+                'dosen_id' => 3,
+                'tahun_ajaran_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        );
+
+        DB::table('angkatans')->insert(
+            [
                 'kode_angkatan' => 'TF218A',
                 'angkatan' => '2018 A',
                 'program_studi_id' => 1,

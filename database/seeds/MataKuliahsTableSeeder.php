@@ -40,6 +40,97 @@ class MataKuliahsTableSeeder extends Seeder
 
         DB::table('mata_kuliahs')->insert(
             [
+                'kode_matkul' => 'IF7301',
+                'nama_matkul' => 'Sistem Pendukung Keputusan',
+                'sks' => 3,
+                'semester' => 7,
+                'dosen_id' => 2,
+                'program_studi_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        );
+
+        DB::table('mata_kuliahs')->insert(
+            [
+                'kode_matkul' => 'IF7302',
+                'nama_matkul' => 'Pemrograman 6 (Mobile lanjut)',
+                'sks' => 3,
+                'semester' => 7,
+                'dosen_id' => 2,
+                'program_studi_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        );
+
+        DB::table('mata_kuliahs')->insert(
+            [
+                'kode_matkul' => 'IF7303',
+                'nama_matkul' => 'Praktikum Pemrograman 6',
+                'sks' => 1,
+                'semester' => 7,
+                'dosen_id' => 2,
+                'program_studi_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        );
+
+        DB::table('mata_kuliahs')->insert(
+            [
+                'kode_matkul' => 'IF7304',
+                'nama_matkul' => 'Interaksi Manusia dan Komputer',
+                'sks' => 3,
+                'semester' => 7,
+                'dosen_id' => 2,
+                'program_studi_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        );
+
+        DB::table('mata_kuliahs')->insert(
+            [
+                'kode_matkul' => 'IF7305',
+                'nama_matkul' => 'Manajemen Proyek Perangkat Lunak',
+                'sks' => 3,
+                'semester' => 7,
+                'dosen_id' => 2,
+                'program_studi_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        );
+
+        DB::table('mata_kuliahs')->insert(
+            [
+                'kode_matkul' => 'IF7306',
+                'nama_matkul' => 'Digital Image Processing',
+                'sks' => 3,
+                'semester' => 7,
+                'dosen_id' => 2,
+                'program_studi_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        );
+
+        DB::table('mata_kuliahs')->insert(
+            [
+                'kode_matkul' => 'IF7307',
+                'nama_matkul' => 'Praktikum Digital Image Processing',
+                'sks' => 1,
+                'semester' => 7,
+                'dosen_id' => 2,
+                'program_studi_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        );
+
+        DB::table('mata_kuliahs')->insert(
+            [
                 'kode_matkul' => 'TI1322',
                 'nama_matkul' => 'Mesin Industri',
                 'sks' => 2,
