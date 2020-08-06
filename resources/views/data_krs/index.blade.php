@@ -45,7 +45,7 @@
             <tbody>
                 @forelse ($matkul as $result => $hasil)
                     <tr>
-                        <td align="middle">{{ $result + $matkul->firstitem() }}</td>
+                        <td align="center">{{ ++$result }}</td>
                         <td>{{ $hasil->kode_matkul }}</td>
                         <td>{{ $hasil->nama_matkul }}</td>
                         <td align="middle">{{ $hasil->sks }}</td>

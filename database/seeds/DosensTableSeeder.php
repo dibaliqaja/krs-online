@@ -65,6 +65,58 @@ class DosensTableSeeder extends Seeder
 
         DB::table('dosens')->insert(
             [
+                'nidn' => '07123125233',
+                'nama' => 'Amaludin Arifia, S.Kom, M.Kom',
+                'jenis_kelamin' => 'Laki-Laki',
+                'tempat_lahir' => 'Tuban',
+                'tgl_lahir' => '1980-07-02',
+                'agama' => 'Islam',
+                'alamat' => 'Jalan Soekarno Hatta No. 12, Rengel, Tuban',
+                'no_hp' => '085333333299',
+                'email' => 'amaludinarifia@unirow.ac.id',
+                'program_studi_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
+        DB::table('dosens')->insert(
+            [
+                'nidn' => '07123125553',
+                'nama' => 'Aris Wijayanti, S.Kom, M.Kom',
+                'jenis_kelamin' => 'Perempuan',
+                'tempat_lahir' => 'Tuban',
+                'tgl_lahir' => '1980-07-02',
+                'agama' => 'Islam',
+                'alamat' => 'Jalan Soekarno Hatta No. 12, Surabaya',
+                'no_hp' => '085333333299',
+                'email' => 'ariswijayanti@unirow.ac.id',
+                'program_studi_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
+        DB::table('dosens')->insert(
+            [
+                'nidn' => '07123123983',
+                'nama' => 'Asfan Muqtadir, S.Kom, M.Kom',
+                'jenis_kelamin' => 'Perempuan',
+                'tempat_lahir' => 'Tuban',
+                'tgl_lahir' => '1980-07-02',
+                'agama' => 'Islam',
+                'alamat' => 'Jalan Soekarno Hatta No. 12, Surabaya',
+                'no_hp' => '085333333299',
+                'email' => 'asfanmuqtadir@unirow.ac.id',
+                'program_studi_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
+
+        DB::table('dosens')->insert(
+            [
                 'nidn' => '4112424232',
                 'nama' => 'Agung Gumelar, S.T, M.T',
                 'jenis_kelamin' => 'Laki-Laki',

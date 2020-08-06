@@ -26,7 +26,7 @@ class KartuRencanaStudiController extends Controller
         $matkul = MataKuliah::with('program_studi')
                 ->where('program_studi_id', $prodi)
                 ->orderBy('semester', 'asc')
-                ->paginate();
+                ->get();
 
         return view('data_krs.index', compact('matkul', 'tahun_ajaran'));
     }

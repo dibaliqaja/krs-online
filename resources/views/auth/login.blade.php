@@ -61,6 +61,11 @@
                   <div class="form-group">
                     <div class="d-block">
                     	<label for="password" class="control-label">Password</label>
+                        <div class="float-right">
+                            <a href="#" class="text-small">
+                                Lupa Password?
+                            </a>
+                        </div>
                     </div>
                     <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
                     <div class="invalid-feedback">

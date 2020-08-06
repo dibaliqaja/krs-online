@@ -49,6 +49,8 @@
                 </label>
                 <script src="{{ asset('assets/js/dark-mode-switch.js') }}"></script>
                 <ul class="navbar-nav navbar-right">
+                    @if (Auth::user())
+                    @if (auth()->user()->role == 'mahasiswa')
                     <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                             class="nav-link notification-toggle nav-link-lg {{ auth()->user()->unreadNotifications->count() == 0 ? '' : 'beep' }}"><i class="far fa-bell"></i></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -77,7 +79,7 @@
                                         <div class="dropdown-item-desc">
                                             <p class="font-weight-600">{{ $notification->data['data'] }}</p>
                                             <div class="time">{{ $notification->created_at->diffForHumans() }}</div>
-                                            <a href="{{ route('delete.notif', ['id' => $notification->id]) }}" ><i class="fa fa-trash fa-xs float-right mr-3"></i></a>
+                                            <a href="{{ route('delete.notif', ['id' => $notification->id]) }}" ><i class="fa fa-trash fa-xs float-right"></i></a>
                                         </div>
                                     </div>
                                 @endforeach
@@ -87,7 +89,7 @@
                             </div>
                         </div>
                     </li>
-                    @if (Auth::user())
+                    @endif
                     <li class="dropdown"><a href="#" data-toggle="dropdown"
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                             @if (auth()->user()->role == 'mahasiswa')

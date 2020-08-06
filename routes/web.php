@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth', 'CheckRole:mahasiswa']], function () {
     Route::get('profile/mahasiswa/password', 'ProfileMahasiswaController@changePassword')->name('profile.mahasiswa.change');
     Route::patch('profile/mahasiswa/password', 'ProfileMahasiswaController@updatePassword')->name('profile.mahasiswa.password');
 
-    Route::get('kartu-rencana-stud  i/mahasiswa/ambil-krs', 'KartuRencanaStudiController@indexMahasiswa')->name('mahasiswa.krs');
+    Route::get('kartu-rencana-studi/mahasiswa/ambil-krs', 'KartuRencanaStudiController@indexMahasiswa')->name('mahasiswa.krs');
     // Route::post('kartu-rencana-studi/mahasiswa/pilih', 'KartuRencanaStudiController@create')->name('mahasiswa.krs.create');
     Route::post('kartu-rencana-studi/mahasiswa', 'KartuRencanaStudiController@store')->name('mahasiswa.krs.store');
     Route::get('kartu-rencana-studi/mahasiswa/hasil-krs', 'KartuRencanaStudiController@indexMahasiswaHasil')->name('mahasiswa.krs.hasil');
