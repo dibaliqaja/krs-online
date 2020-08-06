@@ -50,7 +50,7 @@
                 <script src="{{ asset('assets/js/dark-mode-switch.js') }}"></script>
                 <ul class="navbar-nav navbar-right">
                     <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-                            class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+                            class="nav-link notification-toggle nav-link-lg {{ auth()->user()->unreadNotifications->count() == 0 ? '' : 'beep' }}"><i class="far fa-bell"></i></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
                             <div class="dropdown-header">Notifications
                                 <div class="float-right">
@@ -59,7 +59,7 @@
                             </div>
                             <div class="dropdown-list-content dropdown-list-icons">
                                 @foreach (auth()->user()->unreadNotifications as $notification)
-                                    <a href="#" class="dropdown-item dropdown-item-unread">
+                                    <div class="dropdown-item dropdown-item-unread">
                                         <div class="dropdown-item-icon bg-success text-white">
                                             <i class="fas fa-check"></i>
                                         </div>
@@ -67,18 +67,19 @@
                                             <p class="font-weight-600">{{ $notification->data['data'] }}</p>
                                             <div class="time">{{ $notification->created_at->diffForHumans() }}</div>
                                         </div>
-                                    </a>
+                                    </div>
                                 @endforeach
                                 @foreach (auth()->user()->readNotifications as $notification)
-                                    <a href="#" class="dropdown-item">
+                                    <div class="dropdown-item">
                                         <div class="dropdown-item-icon bg-success text-white">
                                             <i class="fas fa-check"></i>
                                         </div>
                                         <div class="dropdown-item-desc">
                                             <p class="font-weight-600">{{ $notification->data['data'] }}</p>
                                             <div class="time">{{ $notification->created_at->diffForHumans() }}</div>
+                                            <a href="{{ route('delete.notif', ['id' => $notification->id]) }}" ><i class="fa fa-trash fa-xs float-right mr-3"></i></a>
                                         </div>
-                                    </a>
+                                    </div>
                                 @endforeach
                             </div>
                             <div class="dropdown-footer text-center">
@@ -108,6 +109,9 @@
                             @if (auth()->user()->role == 'mahasiswa')
                                 <a href="{{ route('profile.mahasiswa.edit') }}" class="dropdown-item has-icon">
                                     <i class="far fa-user"></i> Profile
+                                </a>
+                                <a href="{{ route('profile.mahasiswa.password') }}" class="dropdown-item has-icon">
+                                    <i class="fas fa-cog"></i> Edit Password
                                 </a>
                             @elseif (auth()->user()->role == 'admin')
                                 <a href="{{ route('profile.admin.edit') }}" class="dropdown-item has-icon">

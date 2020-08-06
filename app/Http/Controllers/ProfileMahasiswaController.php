@@ -32,8 +32,6 @@ class ProfileMahasiswaController extends Controller
             'alamat' => 'required|min:5',
             'no_hp' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'required',
-            'password_confirmation' => 'required|same:password',
             'avatar' => 'image|max:1024',
         ]);
 
@@ -58,7 +56,7 @@ class ProfileMahasiswaController extends Controller
                 'username' => $request->npm,
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password)
+                // 'password' => Hash::make($request->password)
             ];
         } else {
             $mahasiswa_data = [
@@ -76,7 +74,7 @@ class ProfileMahasiswaController extends Controller
                 'username' => $request->npm,
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
+                // 'password' => Hash::make($request->password),
             ];
         }
 
@@ -87,5 +85,35 @@ class ProfileMahasiswaController extends Controller
         $newUser->update($user_data);
 
         return redirect()->back()->with('success','Profile berhasil diupdate.');
+    }
+
+    public function changePassword(Request $request)
+    {
+        return view('profile.mahasiswa.password', [
+            'user' => $request->user()
+        ]);
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $user = $request->user();
+
+        $request->validate([
+            'current_password'      => 'required',
+            'password'              => 'required',
+            'password_confirmation' => 'required|same:password'
+        ]);
+
+        $plainPassword = $request->get('current_password');
+
+        if (Hash::check($plainPassword, $user->password) == true) {
+            $user->password = bcrypt(request('password'));
+            $user->save();
+
+            return redirect()->back()->with('success','Password berhasil diupdate.');
+        }
+
+        return redirect()->back()->with('error','Password Lama Salah.');
+
     }
 }

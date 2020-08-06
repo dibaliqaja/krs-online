@@ -73,14 +73,6 @@
             <input type="email" class="form-control" name="email" value="{{ old('email', $user->email) }}">
         </div>
         <div class="form-group">
-            <label for="">Password</label>
-            <input type="password" class="form-control" name="password" placeholder="********">
-        </div>
-        <div class="form-group">
-            <label for="">Password Confirmation</label>
-            <input type="password" class="form-control" name="password_confirmation" placeholder="********">
-        </div>
-        <div class="form-group">
             <label for="">Profil Image</label>
             <input type="file" class="form-control-file" name="avatar">
             <span class="text-small text-danger font-italic">Max image upload is 1024 kilobytes</span>
