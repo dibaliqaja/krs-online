@@ -21,14 +21,16 @@ class KartuRencanaStudiController extends Controller
     public function indexMahasiswa(Request $request)
     {
         $prodi = Auth::user()->mahasiswa->angkatan->program_studi->id;
-        $tahun_ajaran = TahunAjaran::all();
+        // $tahun_ajaran = TahunAjaran::all();
+        $semester = $request->get('semester');
 
         $matkul = MataKuliah::with('program_studi')
                 ->where('program_studi_id', $prodi)
                 ->orderBy('semester', 'asc')
+                ->where('semester', $semester)
                 ->get();
 
-        return view('data_krs.index', compact('matkul', 'tahun_ajaran'));
+        return view('data_krs.index', compact('matkul'));
     }
 
     /**

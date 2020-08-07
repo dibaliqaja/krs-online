@@ -22,7 +22,29 @@
     </div>
     @endif
     <div class="row">
-        <div class="col-md-12 mt-1 float-right">
+        <div class="col-md-2 m-1">
+            <form action="{{ route('mahasiswa.krs') }}">
+                <select name="semester" id="semester" class="form-control">
+                    <option value="">Semester</option>
+                    <option {{ Request::get('semester') == "1" ? "selected" : "" }} value="1">1</option>
+                    <option {{ Request::get('semester') == "2" ? "selected" : "" }} value="2">2</option>
+                    <option {{ Request::get('semester') == "3" ? "selected" : "" }} value="3">3</option>
+                    <option {{ Request::get('semester') == "4" ? "selected" : "" }} value="4">4</option>
+                    <option {{ Request::get('semester') == "5" ? "selected" : "" }} value="5">5</option>
+                    <option {{ Request::get('semester') == "6" ? "selected" : "" }} value="6">6</option>
+                    <option {{ Request::get('semester') == "7" ? "selected" : "" }} value="7">7</option>
+                    <option {{ Request::get('semester') == "8" ? "selected" : "" }} value="8">8</option>
+                </select>
+        </div>
+        <div class="col-md-1 m-2">
+            <input type="submit" value="Pilih" class="btn btn-primary">
+            </form>
+        </div>
+        <div class="col-md-3 m-2">
+            <input class="form-control" value="Kelas {{ Auth::user()->mahasiswa->angkatan->angkatan }}" disabled>
+        </div>
+
+        <div class="col-md-5 m-3 float-right">
             <form action="{{ route('mahasiswa.krs.store') }}" method="POST">
                 @csrf
                 <button class="btn btn-primary float-right" type="submit">Ambil KRS</button>
