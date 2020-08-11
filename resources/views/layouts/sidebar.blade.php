@@ -1,3 +1,19 @@
+@section('script_atas')
+<script>
+    $(document).ready(function(){
+        $('#mychatbox2').hide();
+
+        $('#tampil').click(function(){
+            $('#mychatbox2').show();
+        });
+
+        // $('.sembunyi').click(function(){
+        //     $('.gambar').hide();
+        // });
+    });
+</script>
+@endsection
+
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
@@ -118,32 +134,32 @@
                 <li><a class="nav-link" href="#"><i class="fas fa-history"></i> <span>Riwayat Aktifitas</span></a></li>
                 <li class="menu-header">Who's Online?</li>
                 <li>
-                    <a class="nav-link" href="#">
-                        <img alt="image" class="rounded-circle" width="20" src="assets/img/avatar/avatar-1.png">
+                    <a class="nav-link" href="javascript:void(0)" onclick="myFunction()">
+                        <img alt="image" class="rounded-circle" width="20" src="{{ asset('assets/img/avatar/avatar-1.png') }}">
                         <span class="ml-2">Hasan Basri</span><span class="bullet text-success"></span>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="#">
-                        <img alt="image" class="rounded-circle" width="20" src="assets/img/avatar/avatar-1.png">
+                    <a class="nav-link" href="javascript:void(0)" onclick="myFunction()">
+                        <img alt="image" class="rounded-circle" width="20" src="{{ asset('assets/img/avatar/avatar-1.png') }}">
                         <span class="ml-2">Rizal Fakhri</span><span class="bullet text-success"></span>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="#">
-                        <img alt="image" class="rounded-circle" width="20" src="assets/img/avatar/avatar-1.png">
+                    <a class="nav-link" href="javascript:void(0)" onclick="myFunction()">
+                        <img alt="image" class="rounded-circle" width="20" src="{{ asset('assets/img/avatar/avatar-1.png') }}">
                         <span class="ml-2">Wildan Asa</span><span class="bullet"></span>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="#">
-                        <img alt="image" class="rounded-circle" width="20" src="assets/img/avatar/avatar-1.png">
+                    <a class="nav-link" href="javascript:void(0)" onclick="myFunction()">
+                        <img alt="image" class="rounded-circle" width="20" src="{{ asset('assets/img/avatar/avatar-1.png') }}">
                         <span class="ml-2">Bagus Agri</span><span class="bullet"></span>
                     </a>
                 </li>
                 <li>
-                    <a class="nav-link" href="#">
-                        <img alt="image" class="rounded-circle" width="20" src="assets/img/avatar/avatar-1.png">
+                    <a class="nav-link" href="javascript:void(0)" onclick="myFunction()">
+                        <img alt="image" class="rounded-circle" width="20" src="{{ asset('assets/img/avatar/avatar-1.png') }}">
                         <span class="ml-2">Agung Risa</span><span class="bullet text-success"></span>
                     </a>
                 </li>
@@ -151,6 +167,5 @@
                 </div>
             @endif
         </ul>
-
     </aside>
 </div>

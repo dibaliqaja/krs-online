@@ -28,6 +28,17 @@
 
         gtag('config', 'UA-94034622-3');
     </script>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("mychatbox2");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
     <!-- /END GA -->
 </head>
 
@@ -151,10 +162,16 @@
                     </div>
                 </section>
 
-                {{-- <div class="col-12 col-sm-6 col-lg-4 float-right">
-                    <div class="card chat-box card-success" id="mychatbox2">
+                <div class="col-12 col-sm-6 col-lg-4 float-right">
+                    <div class="card chat-box card-success fixed-bottom" id="mychatbox2" style="
+                    width:300px;
+                    position:fixed;
+                    right:50px;
+                    margin-left: 75%;
+                    margin-bottom: 3px;
+                    display: none;">
                         <div class="card-header">
-                            <h4><i class="fas fa-circle text-success mr-2" title="Online" data-toggle="tooltip"></i> Chat with Hasan</h4>
+                            <h4><i class="fas fa-circle text-success mr-2" title="Online" data-toggle="tooltip"></i> Chat dengan Hasan</h4>
                         </div>
                         <div class="card-body chat-content">
                         </div>
@@ -167,7 +184,7 @@
                             </form>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
             <!-- End Main Content -->
 
