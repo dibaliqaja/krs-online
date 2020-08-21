@@ -60,6 +60,8 @@
                 </label>
                 <script src="{{ asset('assets/js/dark-mode-switch.js') }}"></script>
                 <ul class="navbar-nav navbar-right">
+                    @if (Auth::user())
+                    @if (auth()->user()->role == 'mahasiswa')
                     <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                             class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
@@ -96,8 +98,6 @@
                             </div>
                         </div>
                     </li>
-                    @if (Auth::user())
-                    @if (auth()->user()->role == 'mahasiswa')
                     <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                             class="nav-link notification-toggle nav-link-lg {{ auth()->user()->unreadNotifications->count() == 0 ? '' : 'beep' }}"><i class="far fa-bell"></i></a>
                         <div class="dropdown-menu dropdown-list dropdown-menu-right">
