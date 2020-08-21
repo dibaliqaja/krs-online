@@ -60,6 +60,42 @@
                 </label>
                 <script src="{{ asset('assets/js/dark-mode-switch.js') }}"></script>
                 <ul class="navbar-nav navbar-right">
+                    <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+                            class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
+                        <div class="dropdown-menu dropdown-list dropdown-menu-right">
+                            <div class="dropdown-header">Messages
+                                <div class="float-right">
+                                    <a href="#">Mark All As Read</a>
+                                </div>
+                            </div>
+                            <div class="dropdown-list-content dropdown-list-message">
+                                <a href="javascript:void(0)" onclick="myFunction()" class="dropdown-item dropdown-item">
+                                    <div class="dropdown-item-avatar">
+                                        <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle">
+                                        <div class="is-online"></div>
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        <b>Hasan Basri</b>
+                                        <p>Cuma ngetest aja</p>
+                                        <div class="time">10 Hours Ago</div>
+                                    </div>
+                                </a>
+                                <a href="javascript:void(0)" onclick="myFunction()" class="dropdown-item dropdown-item">
+                                    <div class="dropdown-item-avatar">
+                                        <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle">
+                                    </div>
+                                    <div class="dropdown-item-desc">
+                                        <b>Rizal Fakhri</b>
+                                        <p>Nyoba aja</p>
+                                        <div class="time">12 Hours Ago</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="dropdown-footer text-center">
+                                {{-- <a href="#">View All <i class="fas fa-chevron-right"></i></a> --}}
+                            </div>
+                        </div>
+                    </li>
                     @if (Auth::user())
                     @if (auth()->user()->role == 'mahasiswa')
                     <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
