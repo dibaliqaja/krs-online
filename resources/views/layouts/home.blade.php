@@ -208,6 +208,7 @@
                     display: none;">
                         <div class="card-header">
                             <h4><i class="fas fa-circle text-success mr-2" title="Online" data-toggle="tooltip"></i> Chat dengan Hasan</h4>
+                            <a href="javascript:void(0)" onclick="myFunction()"><i class="fas fa-times fa-3x text-secondary ml-5 pl-2"></i></a>
                         </div>
                         <div class="card-body chat-content">
                         </div>
